@@ -32,6 +32,7 @@ class Character extends MoveableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.applyGravity();
         this.animateWalk();
+        this.animateJump();
     }
 
     animateWalk() {
@@ -59,6 +60,14 @@ class Character extends MoveableObject {
                 }
             }
         }, 100);
+    }
+
+    animateJump() {
+        setInterval(() => {
+            if (this.world.keyboard.SPACE) {
+                this.speedY = 20;
+            }
+        }, 1000 / 120);
     }
 
     playWalkingSound() {
