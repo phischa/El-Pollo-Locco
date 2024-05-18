@@ -1,29 +1,11 @@
-class MoveableObject {
-    x = 20;
-    y = 225;
-    img;
-    height = 200;
-    width = 120;
-    imageCache = {};
-    currentImage = 0;
+class MoveableObject extends DrawableObject {
+    
     speed = 0.2;
     otherDirection = false;
     speedY = 0;
     acceleration = 2;
     energy = 100;
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-    loadImages(arr) {
-        arr.forEach((path) => {
-            let img = new Image();
-            img.src = path;
-            this.imageCache[path] = img;
-        });
-    }
+    lastHit = 0;
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
@@ -53,10 +35,6 @@ class MoveableObject {
         return this.y < 120;
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
     drawFrame(ctx) {
         if (this instanceof Character || this instanceof Chicken) {
             ctx.beginPath();
@@ -79,10 +57,18 @@ class MoveableObject {
     }
 
     hit() {
-        this.energy -= 10;
+        this.energy -= 20;
         if (this.energy <= 0) {
             this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
         }
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
+        timePassed = timePassed / 1000; //Difference in s
+        return timePassed < 1;
     }
 
     isDead() {
