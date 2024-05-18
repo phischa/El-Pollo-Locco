@@ -10,6 +10,7 @@ class MoveableObject {
     otherDirection = false;
     speedY = 0;
     acceleration = 2;
+    energy = 100;
 
     loadImage(path) {
         this.img = new Image();
@@ -75,5 +76,16 @@ class MoveableObject {
             (this.y + this.offsetY + this.height) >= obj.y &&
             (this.y + this.offsetY) <= (obj.y + obj.height) &&
             obj.onCollisionCourse; */
+    }
+
+    hit() {
+        this.energy -= 10;
+        if (this.energy <= 0) {
+            this.energy = 0;
+        }
+    }
+
+    isDead() {
+        return this.energy == 0;
     }
 }

@@ -20,15 +20,6 @@ class World {
         this.character.world = this;
     }
 
-    checkCollisions() {
-        setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                };
-            })
-        }, 200);
-    };
-
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -75,4 +66,15 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     }
+
+    checkCollisions() {
+        setInterval(() => {
+            this.level.enemies.forEach((enemy) => {
+                if (this.character.isColliding(enemy)) {
+                    this.character.hit();
+                    console.log('Energie', this.character.energy);
+                };
+            })
+        }, 200);
+    };
 }
