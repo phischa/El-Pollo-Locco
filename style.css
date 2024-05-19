@@ -5,8 +5,22 @@ body{
     flex-direction: column;
     height: 100svh;
     overflow: hidden;
+    background-image: url(/img/background/bg3.jpg);
+    background-position: 50% 70%;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Bungee Spice', 'Arial', 'Helvetica', 'sans-serif';
 }
 
 canvas {
     background-color: black;
+    border: 2px solid #A02209;
+}
+
+h1 {
+    font-size: 40px;
+    letter-spacing: 1px;
+    color: #A02209;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.6);
 }
