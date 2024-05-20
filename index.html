@@ -20,6 +20,7 @@
     <script src="models/cloud.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/background-object.class.js"></script>
+    <!-- <script src="models/icon.class.js"></script> -->
     <script src="models/level.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
@@ -27,9 +28,17 @@
 </head>
 
 <body onload="init()">
-    <h1>El Pollo Locco</h1>
+    <h1 id="title">El Pollo Locco</h1>
 
-    <canvas id="canvas" width="720px" height="480px"></canvas>
+    <div id="main-container">
+        <canvas id="canvas" width="720px" height="480px"></canvas>
+    </div>
+
+    <!-- <div class="overlay">
+        <div>
+            <img class="hover" src="./img/icons/expand.png" onclick="fullscreen(event)">
+        </div>
+    </div> -->
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-body{
+body {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,7 +15,26 @@ body{
 
 canvas {
     background-color: black;
-    border: 2px solid #A02209;
+    border: 1px solid #A02209;
+    display: block;
+}
+
+/* Smartphone */
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+
+    title {
+        position: absolute;
+        top: 0;
+    }
 }
 
 h1 {
@@ -24,3 +43,33 @@ h1 {
     color: #A02209;
     text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.6);
 }
+
+/* #main-container {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+}
+
+.overlay {
+    z-index: 2;
+    position: absolute;
+    position: absolute;
+    top: 180px;
+    left: 900px;
+    width: 500px;
+    height: 300px;
+}
+
+.overlay img {
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    ;
+    margin: 10px;
+}
+
+.overlay img:hover {
+    transform: scale(1.2);
+} */
