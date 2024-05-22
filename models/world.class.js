@@ -2,12 +2,17 @@ class World {
 
     character = new Character();
     level = level1;
+    enemies = level1.enemies;
+    endboss = level1.endboss
+    clouds = level1.clouds;
+    backgroundObject = level1.backgroundObject;
     canvas;
     ctx;
     keyboard;
     camera_x = -100;
     statusBar = new StatusBar();
     throwableObjects = [];
+    chickenIsDead = false;
     /* icon = new Icon(); */
 
     constructor(canvas, keyboard) {
@@ -33,7 +38,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0); // for fixed statusBar
         this.addToMap(this.statusBar);
         this.ctx.translate(this.camera_x, 0); // for fixed statusBar
-        
+
         this.addToMap(this.character);
 
         /* this.ctx.translate(-this.camera_x, 0); // for fixed statusBar
@@ -84,6 +89,7 @@ class World {
         setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
+            this.checkJumpAttack();
         }, 200);
     };
 
@@ -96,8 +102,38 @@ class World {
         })
     }
 
+    /**
+    * Checks for attacks against enemies and initiates death animation.
+    */
+    checkJumpAttack() {
+        this.enemies.forEach((enemy) => {
+            if (this.chickenIsAttacked(enemy)) {
+                this.enemyDies(enemy);
+            }
+        });
+    };
+
+        /**
+     * Returns a true or false statement for attack against enemies.
+     * @param {Object} enemy Enemy object from the enemies array
+     * @returns  boolean statement to check collision with enemies from above during attack
+     */
+        chickenIsAttacked(enemy) {
+            return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead()
+        }
+    
+        /**
+        * Executes enemy death sequence
+        * @param {Object} enemy Enemy object from the enemies array
+        */
+        enemyDies(enemy) {
+            enemy.energy--;
+            this.character.jump();
+        }
+
+        
     checkThrowObjects() {
-        if(this.keyboard.KeyD) {
+        if (this.keyboard.KeyD) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
