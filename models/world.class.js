@@ -95,10 +95,12 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if(this.character.isColliding(enemy) && this.character.isAboveGround()) { 
+                return;
+            } else if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
-            };
+            }
         })
     }
 
@@ -106,11 +108,13 @@ class World {
     * Checks for attacks against enemies and initiates death animation.
     */
     checkJumpAttack() {
-        this.enemies.forEach((enemy) => {
-            if (this.chickenIsAttacked(enemy)) {
-                this.enemyDies(enemy);
-            }
-        });
+        setInterval(() => {
+            this.enemies.forEach((enemy) => {
+                if (this.chickenIsAttacked(enemy)) {
+                    this.enemyDies(enemy);
+                }
+            });
+        }, 100);
     };
 
         /**
