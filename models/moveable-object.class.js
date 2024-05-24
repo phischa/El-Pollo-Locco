@@ -6,12 +6,19 @@ class MoveableObject extends DrawableObject {
     acceleration = 2;
     energy = 100;
     lastHit = 0;
+    play;
 
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
         this.currentImage++;
+    }
+
+    play() {
+        this.play = setInterval(() => {
+            playAnimation();
+        }, 500);
     }
 
     moveRight() {

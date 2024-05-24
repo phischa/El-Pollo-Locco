@@ -1,8 +1,9 @@
-class Chicks extends MoveableObject {
-    
+class Chicks extends Chicken {
+
     width = 40;
     height = 50;
     y = 370;
+    chickenInterval;
 
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
@@ -24,20 +25,15 @@ class Chicks extends MoveableObject {
         this.animateWalk();
     }
 
-    animateWalk() {
-        setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
-        setInterval(() => {
-            if (this.chickenIsDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-            } else {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
-        }, 150);
-    }
 
     chickenIsDead(enemy) {
         return this.energy === 0;
+    }
+
+    removeImage() {
+        setTimeout(() => {
+            this.removeImage(this.IMAGES_DEAD);
+            this.removeImage(this.IMAGES_WALKING);
+        }, 1000);
     }
 }

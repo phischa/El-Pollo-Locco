@@ -1,8 +1,9 @@
 class Chicken extends MoveableObject {
-    
+
     width = 60;
     height = 90;
     y = 340;
+    chickenInterval;
 
     IMAGES_WALKING = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
@@ -17,7 +18,7 @@ class Chicken extends MoveableObject {
     constructor() {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_DEAD, 'dead-image');
         this.x = 600 + Math.random() * 1800;
         this.speed = 0.2 + Math.random() * 0.5;
         this.energy = 1;
@@ -25,12 +26,18 @@ class Chicken extends MoveableObject {
     }
 
     animateWalk() {
-        setInterval(() => {
+        this.chickenInterval = setInterval(() => {
             this.moveLeft();
         }, 1000 / 60);
+        this.switchAnimation();
+    }
+
+    switchAnimation() {
         setInterval(() => {
             if (this.chickenIsDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.stopMovement();
+                this.stopPlayAnimation();
             } else {
                 this.playAnimation(this.IMAGES_WALKING);
             }
@@ -40,5 +47,21 @@ class Chicken extends MoveableObject {
     chickenIsDead(enemy) {
         return this.energy === 0;
     }
+
+    /**
+     * stops movement intervall
+     */
+    stopMovement() {
+        clearInterval(this.chickenInterval);
+    }
+
+    stopPlayAnimation() {
+        console.log('Stopping play animation and removing dead image');
+        setTimeout(() => {
+            const deadImage = document.querySelector('.dead-image');
+            if (deadImage) {
+                deadImage.remove();
+            }
+        }, 1000);
+    } 
 }
-    
