@@ -23,6 +23,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.initAudioContext();
     }
 
     setWorld() {
@@ -41,7 +42,7 @@ class World {
         });
     }
 
-    /* playMusic() {
+    playMusic() {
         if (this.music.paused) {
             this.music.play().catch(error => {
                 console.error('Error playing sound:', error);
@@ -51,7 +52,7 @@ class World {
                 this.music.play();
             });
         }
-    } */
+    }
 
     pauseMusic() {
         this.music.pause();
