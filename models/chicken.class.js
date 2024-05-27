@@ -22,6 +22,7 @@ class Chicken extends MoveableObject {
         this.x = 600 + Math.random() * 1800;
         this.speed = 0.2 + Math.random() * 0.5;
         this.energy = 1;
+        this.visible = true;
         this.animateWalk();
     }
 
@@ -44,7 +45,7 @@ class Chicken extends MoveableObject {
         }, 150);
     }
 
-    chickenIsDead(enemy) {
+    chickenIsDead() {
         return this.energy === 0;
     }
 
@@ -58,10 +59,13 @@ class Chicken extends MoveableObject {
     stopPlayAnimation() {
         console.log('Stopping play animation and removing dead image');
         setTimeout(() => {
-            const deadImage = document.querySelector('.dead-image');
-            if (deadImage) {
-                deadImage.remove();
-            }
+            this.visible = false; // Set the visible property to false after 1 second
         }, 1000);
-    } 
+    }
+
+    draw(ctx) {
+        if (this.visible) { // Draw the chicken only if it's visible
+            super.draw(ctx);
+        }
+    }
 }

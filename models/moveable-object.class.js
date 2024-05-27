@@ -15,9 +15,9 @@ class MoveableObject extends DrawableObject {
         this.currentImage++;
     }
 
-    play() {
-        this.play = setInterval(() => {
-            playAnimation();
+    play(images) {
+        this.playInterval = setInterval(() => {
+            this.playAnimation(images);
         }, 500);
     }
 
