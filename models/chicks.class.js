@@ -22,18 +22,28 @@ class Chicks extends Chicken {
         this.x = 600 + Math.random() * 1800;
         this.speed = 0.2 + Math.random() * 0.5;
         this.energy = 1;
+        this.visible = true; // Set the visible property to false after 1 second
+        this.collidable = true;
         this.animateWalk();
     }
 
 
-    chickenIsDead(enemy) {
-        return this.energy === 0;
+    switchAnimation() {
+        setInterval(() => {
+            if (this.chickenIsDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+                this.stopMovement();
+                this.stopPlayAnimation();
+            } else {
+                this.playAnimation(this.IMAGES_WALKING);
+            }
+        }, 150);
     }
 
-    removeImage() {
+    stopPlayAnimation() {
         setTimeout(() => {
-            this.removeImage(this.IMAGES_DEAD);
-            this.removeImage(this.IMAGES_WALKING);
+            this.visible = false; // Set the visible property to false after 1 second
+            this.collidable = false;
         }, 1000);
     }
 }

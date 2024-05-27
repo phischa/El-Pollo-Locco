@@ -23,12 +23,15 @@ class Chicken extends MoveableObject {
         this.speed = 0.2 + Math.random() * 0.5;
         this.energy = 1;
         this.visible = true;
+        this.collidable = true;
         this.animateWalk();
     }
 
     animateWalk() {
         this.chickenInterval = setInterval(() => {
-            this.moveLeft();
+            if (this.visible) { // Only move if the chicken is visible
+                this.moveLeft();
+            }
         }, 1000 / 60);
         this.switchAnimation();
     }
@@ -60,7 +63,8 @@ class Chicken extends MoveableObject {
         console.log('Stopping play animation and removing dead image');
         setTimeout(() => {
             this.visible = false; // Set the visible property to false after 1 second
-        }, 1000);
+            this.collidable = false;
+        }, 500);
     }
 
     draw(ctx) {
