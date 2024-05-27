@@ -10,6 +10,7 @@ class World {
     ctx;
     keyboard;
     camera_x = -100;
+    music = new Audio('audio/salsa.mp3');
     statusBar = new StatusBar();
     throwableObjects = [];
     chickenIsDead = false;
@@ -26,6 +27,34 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.playMusic();
+    }
+
+    initAudioContext() {
+        const playMusicButton = document.createElement('button');
+        playMusicButton.innerText = 'Start Game';
+        document.body.appendChild(playMusicButton);
+
+        playMusicButton.addEventListener('click', () => {
+            this.playMusic();
+            playMusicButton.remove();
+        });
+    }
+
+    /* playMusic() {
+        if (this.music.paused) {
+            this.music.play().catch(error => {
+                console.error('Error playing sound:', error);
+            });
+            this.music.addEventListener('ended', () => {
+                this.music.currentTime = 0;
+                this.music.play();
+            });
+        }
+    } */
+
+    pauseMusic() {
+        this.music.pause();
     }
 
     draw() {
@@ -67,7 +96,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        /* mo.drawFrame(this.ctx); */
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -95,7 +124,7 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if(this.character.isColliding(enemy) && this.character.isAboveGround()) { 
+            if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 return;
             } else if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
                 this.character.hit();
@@ -117,25 +146,25 @@ class World {
         }, 100);
     };
 
-        /**
-     * Returns a true or false statement for attack against enemies.
-     * @param {Object} enemy Enemy object from the enemies array
-     * @returns  boolean statement to check collision with enemies from above during attack
-     */
-        chickenIsAttacked(enemy) {
-            return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead()
-        }
-    
-        /**
-        * Executes enemy death sequence
-        * @param {Object} enemy Enemy object from the enemies array
-        */
-        enemyDies(enemy) {
-            enemy.energy--;
-            this.character.jump();
-        }
+    /**
+ * Returns a true or false statement for attack against enemies.
+ * @param {Object} enemy Enemy object from the enemies array
+ * @returns  boolean statement to check collision with enemies from above during attack
+ */
+    chickenIsAttacked(enemy) {
+        return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead()
+    }
 
-        
+    /**
+    * Executes enemy death sequence
+    * @param {Object} enemy Enemy object from the enemies array
+    */
+    enemyDies(enemy) {
+        enemy.energy--;
+        this.character.jump();
+    }
+
+
     checkThrowObjects() {
         if (this.keyboard.KeyD) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
