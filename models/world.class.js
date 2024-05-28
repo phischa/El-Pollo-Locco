@@ -10,7 +10,6 @@ class World {
     ctx;
     keyboard;
     camera_x = -100;
-    music = new Audio('audio/salsa.mp3');
     statusBar = new StatusBar();
     throwableObjects = [];
     chickenIsDead = false;
@@ -23,40 +22,14 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        this.initAudioContext();
+        /* this.initAudioContext(); */
     }
 
     setWorld() {
         this.character.world = this;
-        this.playMusic();
     }
 
-    initAudioContext() {
-        const playMusicButton = document.createElement('button');
-        playMusicButton.innerText = 'Start Game';
-        document.body.appendChild(playMusicButton);
-
-        playMusicButton.addEventListener('click', () => {
-            this.playMusic();
-            playMusicButton.remove();
-        });
-    }
-
-    playMusic() {
-        if (this.music.paused) {
-            this.music.play().catch(error => {
-                console.error('Error playing sound:', error);
-            });
-            this.music.addEventListener('ended', () => {
-                this.music.currentTime = 0;
-                this.music.play();
-            });
-        }
-    }
-
-    pauseMusic() {
-        this.music.pause();
-    }
+    
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

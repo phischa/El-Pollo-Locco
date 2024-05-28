@@ -19,6 +19,53 @@ canvas {
     display: block;
 }
 
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#main-container {
+    position: relative;
+}
+
+#canvas {
+    border: 1px solid black;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #FECF13;
+    margin-top: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
 /* Smartphone */
 @media only screen and (max-width: 720px) {
     canvas {
