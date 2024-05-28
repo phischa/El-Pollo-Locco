@@ -18,7 +18,7 @@
     <script src="models/cloud.class.js"></script>
     <script src="models/world.class.js"></script>
     <script src="models/background-object.class.js"></script>
-    <!-- <script src="models/icon.class.js"></script> -->
+    <script src="models/icon.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/endboss.class.js"></script>
     <script src="levels/level1.js"></script>
@@ -37,13 +37,11 @@
             <h2>Game Over!</h2>
             <button onclick="restartGame()">Restart Game</button>
         </div>
+        <div class="fullscreen">
+                <img class="hover" src="./img/icons/expand.png" onclick="fullscreen()">
+        </div>
     </div>
 
-    <!-- <div class="overlay">
-        <div>
-            <img class="hover" src="./img/icons/expand.png" onclick="fullscreen(event)">
-        </div>
-    </div> -->
+    <script src="js/fullscreen.js"></script>
 </body>
-
 </html>

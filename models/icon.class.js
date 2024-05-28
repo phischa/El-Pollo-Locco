@@ -4,8 +4,6 @@ class Icon extends DrawableObject {
         'img/icons/expand.png',
     ]
 
-    isVisible = true;
-
     constructor() {
         super().loadImage('img/icons/expand.png');
         this.x = 680;
@@ -41,19 +39,6 @@ class Icon extends DrawableObject {
     }
 
     isClicked() {
-        this.goFullScreen();
-    }
-
-    goFullScreen() {
-        if (canvas.requestFullScreen) {
-            canvas.requestFullScreen();
-            this.isVisible = false; // Bild ausblenden
-        } else if (canvas.webkitRequestFullScreen) {
-            canvas.webkitRequestFullScreen();
-            this.isVisible = false; // Bild ausblenden
-        } else if (canvas.mozRequestFullScreen) {
-            canvas.mozRequestFullScreen();
-            this.isVisible = false; // Bild ausblenden
+            this.enterFullscreen();
         }
-    }
 } 
