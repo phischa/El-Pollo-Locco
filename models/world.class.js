@@ -5,7 +5,8 @@ class World {
     enemies = level1.enemies;
     endboss = level1.endboss
     clouds = level1.clouds;
-    backgroundObject = level1.backgroundObject;
+    backgroundObject = level1.backgroundObjects;
+    collectableObjects = level1.collectableObjects;
     canvas;
     ctx;
     keyboard;
@@ -29,8 +30,6 @@ class World {
         this.character.world = this;
     }
 
-    
-
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -48,6 +47,7 @@ class World {
         this.addToMap(this.icon);
         this.ctx.translate(this.camera_x, 0); // for fixed statusBar */
 
+        this.addObjectsToMap(this.level.collectableObjects);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects)
 
@@ -91,6 +91,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            this.checkCollection();
             this.checkThrowObjects();
             this.checkJumpAttack();
         }, 200);
@@ -103,6 +104,14 @@ class World {
             } else if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
+            }
+        })
+    }
+
+    checkCollection() {
+        this.level.collectableObjects.forEach((collectableObject) =>{
+            if (this.character.isColliding(collectableObject)) {
+                console.log('JUHU')
             }
         })
     }

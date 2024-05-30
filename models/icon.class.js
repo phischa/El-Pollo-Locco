@@ -8,8 +8,8 @@ class Icon extends DrawableObject {
         super().loadImage('img/icons/expand.png');
         this.x = 680;
         this.y = 444;
-        this.height = 20;
-        this.width = 20;
+        this.height = 10;
+        this.width = 10;
         this.onClick = this.onClick.bind(this);
         canvas.addEventListener('click', this.onClick);
         this.onHover = this.onHover.bind(this);
