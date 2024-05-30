@@ -109,11 +109,22 @@ class World {
     }
 
     checkCollection() {
-        this.level.collectableObjects.forEach((collectableObject) =>{
+        /* console.log('HI'); */
+        this.level.collectableObjects = this.level.collectableObjects.filter((collectableObject) => {
             if (this.character.isColliding(collectableObject)) {
-                console.log('JUHU')
+                // Perform actions upon collecting the object
+                console.log('Collected an object:', collectableObject);
+                
+                // Example action: updating score
+                // this.character.score += collectableObject.value; // Assuming collectable objects have a value property
+    
+                // Example action: updating status bar or other UI elements
+                // this.statusBar.updateScore(this.character.score); // Assuming you have a method to update the score display
+                
+                return false; // Remove the collected object from the array
             }
-        })
+            return true; // Keep the uncollected object
+        });
     }
 
     /**

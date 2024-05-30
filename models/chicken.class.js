@@ -60,7 +60,6 @@ class Chicken extends MoveableObject {
     }
 
     stopPlayAnimation() {
-        console.log('Stopping play animation and removing dead image');
         this.collidable = false;
         setTimeout(() => {
             this.visible = false; // Set the visible property to false after 1 second
