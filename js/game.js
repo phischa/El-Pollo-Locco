@@ -60,12 +60,6 @@ window.addEventListener('keyup', (e) => {
         // Add code to start the game
     }
     
-    function endGame() {
-        document.getElementById('end-screen').style.display = 'flex';
-        document.getElementById('canvas').style.display = 'none';
-        // Add code to stop the game
-    }
-    
     function restartGame() {
         document.getElementById('end-screen').style.display = 'none';
         document.getElementById('canvas').style.display = 'block';

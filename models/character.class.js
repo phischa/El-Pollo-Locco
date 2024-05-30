@@ -74,12 +74,14 @@ class Character extends MoveableObject {
             this.world.camera_x = -this.x + 80;
         }, 1000 / 120);
     }
-    
+
     switchAnimation() {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
-
+                setTimeout(() => {
+                    this.endGame();
+                }, 2000);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
@@ -116,5 +118,11 @@ class Character extends MoveableObject {
 
     jump() {
         this.speedY = 25;
+    }
+
+    endGame() {
+        document.getElementById('end-screen').style.display = 'flex';
+        document.getElementById('canvas').style.display = 'none';
+        // Add code to stop the game
     }
 }
