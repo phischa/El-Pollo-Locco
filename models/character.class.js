@@ -112,6 +112,16 @@ class Character extends MoveableObject {
         }
     }
 
+    collisionWith(object) {
+        console.log('Checking collision between character and:', object);
+        // Implement your collision detection logic here
+        // Example:
+        return this.x < object.x + object.width &&
+            this.x + this.width > object.x &&
+            this.y < object.y + object.height &&
+            this.y + this.height > object.y;
+    }
+
     pauseWalkingSound() {
         this.walking_sound.pause();
     }

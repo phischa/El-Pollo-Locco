@@ -15,7 +15,7 @@ class Coin extends CollectableObject {
         this.loadImages(this.COIN);
         const randomX = 300 + Math.random() * (1800 - 300);
         this.x = randomX;
-        this.y = Math.random() < 0.5 ? 120 : 150;
+        this.y = Math.random() < 0.5 ? 100 : 130;
         this.switchAnimation();
     }
 
