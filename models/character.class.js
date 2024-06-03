@@ -76,12 +76,13 @@ class Character extends MoveableObject {
     }
 
     switchAnimation() {
-        setInterval(() => {
+        let animeInterval = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
-                    this.endGame();
-                }, 2000);
+                    this.dead = true;
+                    this.endGame(animeInterval);
+                }, 500);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
@@ -113,9 +114,6 @@ class Character extends MoveableObject {
     }
 
     collisionWith(object) {
-        console.log('Checking collision between character and:', object);
-        // Implement your collision detection logic here
-        // Example:
         return this.x < object.x + object.width &&
             this.x + this.width > object.x &&
             this.y < object.y + object.height &&
@@ -130,9 +128,8 @@ class Character extends MoveableObject {
         this.speedY = 25;
     }
 
-    endGame() {
+    endGame(animeInterval) {
+        clearInterval(animeInterval);
         document.getElementById('end-screen').style.display = 'flex';
-        document.getElementById('canvas').style.display = 'none';
-        // Add code to stop the game
     }
 }

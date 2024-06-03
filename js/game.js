@@ -5,10 +5,7 @@ let music = new Audio('audio/salsa.mp3');
 
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
     ctx = canvas.getContext('2d');
-
-    console.log('my character is', world.character);
 }
 
 window.addEventListener('keydown', (e) => {
@@ -54,16 +51,20 @@ window.addEventListener('keyup', (e) => {
 });
     
     function startGame() {
+        initLevel();
+        playMusic();
         document.getElementById('start-screen').style.display = 'none';
         document.getElementById('canvas').style.display = 'block';
-        playMusic();
+        world = new World(canvas, keyboard);
         // Add code to start the game
     }
-    
+
     function restartGame() {
+        initLevel();
+        playMusic();
         document.getElementById('end-screen').style.display = 'none';
         document.getElementById('canvas').style.display = 'block';
-        // Add code to restart the game
+        world = new World(canvas, keyboard);
     } 
 
     function playMusic() {
