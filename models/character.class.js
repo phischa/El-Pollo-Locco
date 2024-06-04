@@ -133,11 +133,6 @@ class Character extends MoveableObject {
         this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
-        /* this.x < object.x + object.width &&
-            this.x + this.width > object.x &&
-            this.y < object.y + object.height &&
-            this.y + this.height > object.y; */
-
     pauseWalkingSound() {
         this.walking_sound.volume = 0;
     }

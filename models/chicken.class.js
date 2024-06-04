@@ -60,7 +60,7 @@ class Chicken extends MoveableObject {
     }
 
     /**
-     * stops movement intervall
+     * stops movement interval
      */
     stopMovement() {
         clearInterval(this.chickenInterval);

@@ -3,7 +3,7 @@ class World {
     character = new Character();
     level = level1;
     enemies = level1.enemies;
-    endboss = level1.endboss
+    /* endboss = level1.endboss; */
     clouds = level1.clouds;
     backgroundObject = level1.backgroundObjects;
     collectableObjects = level1.collectableObjects;
@@ -44,13 +44,10 @@ class World {
 
         this.addToMap(this.character);
 
-        /* this.ctx.translate(-this.camera_x, 0); // for fixed statusBar
-        this.addToMap(this.icon);
-        this.ctx.translate(this.camera_x, 0); // for fixed statusBar */
-
         this.addObjectsToMap(this.level.collectableObjects);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
+        /* this.addObjectsToMap(this.level.endboss); */
         this.addObjectsToMap(this.throwableObjects)
 
         this.ctx.translate(-this.camera_x, 0);
@@ -93,6 +90,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
+            /* this.checkCollisionBoss(); */
             this.checkCollectionBottle();
             this.checkCollectionCoin();
             this.checkThrowObjects();
@@ -102,19 +100,24 @@ class World {
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
-                return;
-            } else if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
+            if (this.character.isColliding(enemy) && !this.character.isAboveGround()) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
             }
         })
     }
 
+    /* checkCollisionBoss() {
+            if (this.character.isColliding(this.endboss)) {
+                console.log('BOAH EY');
+                this.character.energy = 0;
+            }
+    } */
+
     checkCollectionBottle() {
         this.level.collectableObjects = this.level.collectableObjects.filter((collectableObject) => {
             if (this.character.collisionWithBottle(collectableObject)) {
-                    return false; // Remove the collected object from the array
+                return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
         });
@@ -123,7 +126,7 @@ class World {
     checkCollectionCoin() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.collisionWithCoin(coin)) {
-                    return false; // Remove the collected object from the array
+                return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
         });
