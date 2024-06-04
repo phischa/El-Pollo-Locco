@@ -5,6 +5,13 @@ class CollectableObject extends MoveableObject {
     width = 110;
     y = 340;
 
+    offset = {
+        top: 15,
+        right: 30,
+        bottom: 15,
+        left: 20,
+    };
+
     BOTTLE_SOIL = [
         'img/6_salsa_bottle/1_salsa_bottle_on_ground.png',
         'img/6_salsa_bottle/2_salsa_bottle_on_ground.png'

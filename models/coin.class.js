@@ -3,7 +3,14 @@ class Coin extends CollectableObject {
     world;
     height = 110;
     width = 110;
-    y = this.y; 
+    y = this.y;
+
+    offset = {
+        top: 30,
+        right: 60,
+        bottom: 60,
+        left: 30,
+    };
 
     COIN = [
         'img/8_coin/coin_1.png',

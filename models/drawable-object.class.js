@@ -26,6 +26,15 @@ class DrawableObject {
     }
     
     drawFrame(ctx) {
+
+        if (this instanceof Character || this instanceof CollectableObject || this instanceof Coin) {
+            ctx.beginPath();
+            ctx.lineWidth = '2';
+            ctx.strokeStyle = 'red';
+            ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
+            ctx.stroke();
+        }
+
         if (this instanceof Character || this instanceof Chicken || this instanceof Chicks || this instanceof CollectableObject || this instanceof Coin) {
             ctx.beginPath();
             ctx.lineWidth = '2';
