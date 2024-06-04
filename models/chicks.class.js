@@ -26,7 +26,7 @@ class Chicks extends Chicken {
         super().loadImage('img/3_enemies_chicken/chicken_small/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DEAD);
-        this.x = 600 + Math.random() * 1800;
+        this.x = 600 + Math.random() * 1600;
         this.speed = 0.2 + Math.random() * 0.5;
         this.energy = 1;
         this.visible = true; // Set the visible property to false after 1 second
