@@ -6,9 +6,9 @@ class CollectableObject extends MoveableObject {
     y = 340;
 
     offset = {
-        top: 15,
+        top: 0,
         right: 30,
-        bottom: 15,
+        bottom: 0,
         left: 20,
     };
 

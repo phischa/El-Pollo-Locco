@@ -121,15 +121,25 @@ class Character extends MoveableObject {
         }
     }
 
-    collisionWith(object) {
-        return this.x < object.x + object.width &&
-            this.x + this.width > object.x &&
-            this.y < object.y + object.height &&
-            this.y + this.height > object.y;
+    collisionWithBottle(mo) {
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+        this.y + this.height > mo.y &&
+        this.x + this.offset.left < mo.x + mo.width - mo.offset.right;
     }
 
+    collisionWithCoin(mo) {
+        return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+        this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+        this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+    }
+
+        /* this.x < object.x + object.width &&
+            this.x + this.width > object.x &&
+            this.y < object.y + object.height &&
+            this.y + this.height > object.y; */
+
     pauseWalkingSound() {
-        this.walking_sound.pause();
+        this.walking_sound.volume = 0;
     }
 
     jump() {

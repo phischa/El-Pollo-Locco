@@ -48,10 +48,12 @@ function initLevel() {
             new CollectableObject(),
             new CollectableObject(),
             new CollectableObject(),
-            new Coin(),
-            new Coin(),
-            new Coin(),
-            new Coin(),
         ],
+        [
+            new Coin(),
+            new Coin(),
+            new Coin(),
+            new Coin(),
+        ]
     );
 }

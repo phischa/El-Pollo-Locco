@@ -7,6 +7,7 @@ class World {
     clouds = level1.clouds;
     backgroundObject = level1.backgroundObjects;
     collectableObjects = level1.collectableObjects;
+    coins = level1.coins;
     canvas;
     ctx;
     keyboard;
@@ -48,6 +49,7 @@ class World {
         this.ctx.translate(this.camera_x, 0); // for fixed statusBar */
 
         this.addObjectsToMap(this.level.collectableObjects);
+        this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects)
 
@@ -91,7 +93,8 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            this.checkCollection();
+            this.checkCollectionBottle();
+            this.checkCollectionCoin();
             this.checkThrowObjects();
             this.checkJumpAttack();
         }, 200);
@@ -108,20 +111,19 @@ class World {
         })
     }
 
-    checkCollection() {
+    checkCollectionBottle() {
         this.level.collectableObjects = this.level.collectableObjects.filter((collectableObject) => {
-            console.log('Checking collision with:', collectableObject);
-            if (this.character.collisionWith(collectableObject)) {
-                // Perform actions upon collecting the object
-                console.log('Collected an object:', collectableObject);
-                
-                // Example action: updating score
-                // this.character.score += collectableObject.value; // Assuming collectable objects have a value property
+            if (this.character.collisionWithBottle(collectableObject)) {
+                    return false; // Remove the collected object from the array
+            }
+            return true; // Keep the uncollected object
+        });
+    }
 
-                // Example action: updating status bar or other UI elements
-                // this.statusBar.updateScore(this.character.score); // Assuming you have a method to update the score display
-
-                return false; // Remove the collected object from the array
+    checkCollectionCoin() {
+        this.level.coins = this.level.coins.filter((coin) => {
+            if (this.character.collisionWithCoin(coin)) {
+                    return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
         });
