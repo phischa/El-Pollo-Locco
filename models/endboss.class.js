@@ -60,7 +60,7 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.speed = 10;
+        this.speed = 15;
         this.x = 2400;
         this.collidable = true;
         this.animate();
@@ -78,7 +78,7 @@ class Endboss extends MoveableObject {
                 this.attack();
             }
             i++;
-            if (world.character.x > 2000 && !this.hadFirstContact) {
+            if (world.character.x > 1640 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
             }

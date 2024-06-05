@@ -137,8 +137,8 @@ h1 {
 span {
     font-size: 17.5px;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.8);
-    text-shadow: 3px 3px 2px #A02209;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: 2px 2px 1px #831600;
 }
 
 /* #main-container {

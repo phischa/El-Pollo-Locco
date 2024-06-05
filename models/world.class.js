@@ -13,6 +13,9 @@ class World {
     keyboard;
     camera_x = -100;
     statusBar = new StatusBar();
+    statusBarCoin = new StatusBarCoin();
+    statusBarBottle = new StatusBarBottle();
+    statusBarBoss = new StatusBarBoss();
     throwableObjects = [];
     chickenIsDead = false;
     /* icon = new Icon(); */
@@ -40,6 +43,9 @@ class World {
 
         this.ctx.translate(-this.camera_x, 0); // for fixed statusBar
         this.addToMap(this.statusBar);
+        this.addToMap(this.statusBarCoin);
+        this.addToMap(this.statusBarBottle);
+        this.addToMap(this.statusBarBoss);
         this.ctx.translate(this.camera_x, 0); // for fixed statusBar
 
         this.addToMap(this.character);
