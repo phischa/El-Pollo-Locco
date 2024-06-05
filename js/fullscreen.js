@@ -1,7 +1,6 @@
 let isFullscreen = false;
 
 function fullscreen() {
-    let element = document.getElementById('main-container');
     if (isFullscreen === false) {
         enterFullscreen();
     } else {

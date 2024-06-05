@@ -2,6 +2,8 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let music = new Audio('audio/salsa.mp3');
+let mute = false;
+
 
 function init() {
     canvas = document.getElementById('canvas');
@@ -80,5 +82,18 @@ window.addEventListener('keyup', (e) => {
     }
 
     function pauseMusic() {
-        music.pause();
+        music.volume = 0.0;
+    }
+
+    function muteSounds() {
+        let img = document.getElementById('volume');
+        if (mute === false) {
+            mute = true;
+            music.volume = 0.0;
+            img.src = './img/icons/mute.png';
+        } else {
+            mute = false;
+            music.volume = 1.0;
+            img.src = './img/icons/volume.png';
+        }
     }

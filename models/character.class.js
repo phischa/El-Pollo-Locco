@@ -122,6 +122,7 @@ class Character extends MoveableObject {
     }
 
     collisionWithBottle(mo) {
+        /* this.bottle.push() */
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
         this.y + this.height > mo.y &&
         this.x + this.offset.left < mo.x + mo.width - mo.offset.right;

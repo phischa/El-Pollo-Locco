@@ -1,5 +1,8 @@
 class World {
 
+    canvas;
+    ctx;
+    keyboard;
     character = new Character();
     level = level1;
     enemies = level1.enemies;
@@ -8,9 +11,9 @@ class World {
     backgroundObject = level1.backgroundObjects;
     collectableObjects = level1.collectableObjects;
     coins = level1.coins;
-    canvas;
-    ctx;
-    keyboard;
+
+    bottleNumber = 0;
+
     camera_x = -100;
     statusBar = new StatusBar();
     statusBarCoin = new StatusBarCoin();
@@ -123,6 +126,7 @@ class World {
     checkCollectionBottle() {
         this.level.collectableObjects = this.level.collectableObjects.filter((collectableObject) => {
             if (this.character.collisionWithBottle(collectableObject)) {
+                this.bottleNumber++;
                 return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
@@ -171,9 +175,10 @@ class World {
 
 
     checkThrowObjects() {
-        if (this.keyboard.KeyD) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(bottle);
+        if (this.keyboard.KeyD && this.bottleNumber > 0) {
+            this.bottleNumber--;
+            this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(this.bottle);
         }
     }
 }
