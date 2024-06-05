@@ -6,13 +6,14 @@ class World {
     character = new Character();
     level = level1;
     enemies = level1.enemies;
-    /* endboss = level1.endboss; */
+    endboss = level1.endboss;
     clouds = level1.clouds;
     backgroundObject = level1.backgroundObjects;
     collectableObjects = level1.collectableObjects;
     coins = level1.coins;
 
     bottleNumber = 0;
+    coinNumber = 0;
 
     camera_x = -100;
     statusBar = new StatusBar();
@@ -116,17 +117,19 @@ class World {
         })
     }
 
-    /* checkCollisionBoss() {
-            if (this.character.isColliding(this.endboss)) {
-                console.log('BOAH EY');
-                this.character.energy = 0;
-            }
-    } */
+    checkCollisionBoss() {
+            this.level.collectableObjects = this.level.collectableObjects.filter((collectableObject) => {
+            if (this.endboss.collisionWithBottle(collectableObject)) {
+                this.endboss.hit();
+            }Í
+        });
+    }
 
     checkCollectionBottle() {
         this.level.collectableObjects = this.level.collectableObjects.filter((collectableObject) => {
             if (this.character.collisionWithBottle(collectableObject)) {
                 this.bottleNumber++;
+                this.statusBarBottle.setBottles(this.bottleNumber);
                 return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
@@ -136,6 +139,7 @@ class World {
     checkCollectionCoin() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.collisionWithCoin(coin)) {
+                this.coinNumber++;
                 return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
@@ -165,7 +169,7 @@ class World {
     }
 
     /**
-    * Executes enemy death sequence
+    * Executes enemy death sequence.
     * @param {Object} enemy Enemy object from the enemies array
     */
     enemyDies(enemy) {
@@ -173,10 +177,13 @@ class World {
         this.character.jump();
     }
 
-
+    /**
+     * Checks if Character has enough bottles to throw.
+     */
     checkThrowObjects() {
         if (this.keyboard.KeyD && this.bottleNumber > 0) {
             this.bottleNumber--;
+            this.statusBarBottle.setBottles(this.bottleNumber);
             this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(this.bottle);
         }

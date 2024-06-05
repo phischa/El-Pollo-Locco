@@ -1,5 +1,6 @@
 class DrawableObject {
 
+    world;
     x = 20;
     y = 225;
     height = 200;
