@@ -140,6 +140,7 @@ class World {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.collisionWithCoin(coin)) {
                 this.coinNumber++;
+                this.statusBarCoin.setCoins(this.coinNumber);
                 return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
