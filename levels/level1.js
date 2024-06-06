@@ -11,6 +11,8 @@ function initLevel() {
             new Chicks(),
             new Chicks(),
             new Chicks(),
+        ],
+        [
             new Endboss(),
         ],
         [

@@ -3,6 +3,7 @@ class World {
     canvas;
     ctx;
     keyboard;
+    /* endboss; */
     character = new Character();
     level = level1;
     enemies = level1.enemies;
@@ -28,6 +29,7 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+    
         this.draw();
         this.setWorld();
         this.run();
@@ -57,7 +59,7 @@ class World {
         this.addObjectsToMap(this.level.collectableObjects);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
-        /* this.addObjectsToMap(this.level.endboss); */
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects)
 
         this.ctx.translate(-this.camera_x, 0);
@@ -100,7 +102,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkCollisions();
-            /* this.checkCollisionBoss(); */
+            this.checkCollisionBoss();
             this.checkCollectionBottle();
             this.checkCollectionCoin();
             this.checkThrowObjects();
@@ -118,10 +120,11 @@ class World {
     }
 
     checkCollisionBoss() {
-            this.level.collectableObjects = this.level.collectableObjects.filter((collectableObject) => {
-            if (this.endboss.collisionWithBottle(collectableObject)) {
-                this.endboss.hit();
-            }Í
+        this.endboss.forEach(boss => {
+            if (this.character.isColliding(boss)) {
+                this.character.hit();
+                this.statusBar.setPercentage(this.character.energy);
+            }
         });
     }
 
@@ -168,6 +171,10 @@ class World {
     chickenIsAttacked(enemy) {
         return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead()
     }
+
+    /* bossIsAttacked(enemy) {
+        return this.throwableObjects.isColliding(enemy) && this.
+    } */
 
     /**
     * Executes enemy death sequence.
