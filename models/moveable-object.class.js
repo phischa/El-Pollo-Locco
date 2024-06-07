@@ -55,14 +55,13 @@ class MoveableObject extends DrawableObject {
                             this.y + this.height > mo.y &&
                             this.x < mo.x + mo.width &&
                             this.y < mo.y + mo.height;
-        console.log(`Checking collision between ${this.constructor.name} and ${mo.constructor.name}: ${isColliding}`);
         return isColliding;
     }
 
-    /* isCollidingBoss(mo) {
+    isCollidingBoss(mo) {
         return this.x + this.width - this.offset.right > mo.x &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
-    } */
+    }
     /* isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&

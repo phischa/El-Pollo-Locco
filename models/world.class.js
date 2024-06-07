@@ -3,7 +3,6 @@ class World {
     canvas;
     ctx;
     keyboard;
-    /* endboss; */
     character = new Character();
     level = level1;
     enemies = level1.enemies;
@@ -23,13 +22,11 @@ class World {
     statusBarBoss = new StatusBarBoss();
     throwableObjects = [];
     chickenIsDead = false;
-    /* icon = new Icon(); */
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-    
         this.draw();
         this.setWorld();
         this.run();
@@ -107,6 +104,7 @@ class World {
             this.checkCollectionCoin();
             this.checkThrowObjects();
             this.checkJumpAttack();
+            this.checkBottleAttack();
         }, 200);
     };
 
@@ -120,7 +118,7 @@ class World {
     }
 
     checkCollisionBoss() {
-        this.endboss.forEach(boss => {
+        this.endboss.forEach((boss) => {
             if (this.character.isColliding(boss)) {
                 this.character.hit();
                 this.statusBar.setPercentage(this.character.energy);
@@ -164,17 +162,31 @@ class World {
     };
 
     /**
+    * Checks for attacks against endboss.
+    */
+    checkBottleAttack() {
+        setInterval(() => {
+            this.endboss.forEach((boss) => {
+                if (this.bossIsAttacked(boss)) {
+                    console.log('HAHA');
+                    this.endboss.energy--;
+                }
+            });
+        }, 100);
+    };
+
+    /**
  * Returns a true or false statement for attack against enemies.
  * @param {Object} enemy Enemy object from the enemies array
  * @returns  boolean statement to check collision with enemies from above during attack
  */
     chickenIsAttacked(enemy) {
-        return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead()
+        return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead();
     }
 
-    /* bossIsAttacked(enemy) {
-        return this.throwableObjects.isColliding(enemy) && this.
-    } */
+    bossIsAttacked(boss) {
+        return this.throwableObjects.some((throwableObject) => throwableObject.isCollidingBoss(boss));
+    }
 
     /**
     * Executes enemy death sequence.
