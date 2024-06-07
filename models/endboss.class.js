@@ -61,6 +61,7 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
         this.speed = 15;
+        this.energy = 100;
         this.x = 2400;
         this.visible = true;
         this.collidable = true;

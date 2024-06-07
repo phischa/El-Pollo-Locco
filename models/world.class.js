@@ -165,16 +165,14 @@ class World {
     * Checks for attacks against endboss.
     */
     checkBottleAttack() {
-        setInterval(() => {
             this.endboss.forEach((boss) => {
                 if (this.bossIsAttacked(boss)) {
-                    console.log('HAHA');
-                    this.endboss.energy--;
+                    console.log('AUA');
+                    this.endboss.hitWithBottle();
                 }
             });
-        }, 100);
     };
-
+    
     /**
  * Returns a true or false statement for attack against enemies.
  * @param {Object} enemy Enemy object from the enemies array

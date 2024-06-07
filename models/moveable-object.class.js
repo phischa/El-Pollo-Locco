@@ -52,9 +52,9 @@ class MoveableObject extends DrawableObject {
 
     isColliding(mo) {
         const isColliding = mo.collidable && this.x + this.width > mo.x &&
-                            this.y + this.height > mo.y &&
-                            this.x < mo.x + mo.width &&
-                            this.y < mo.y + mo.height;
+            this.y + this.height > mo.y &&
+            this.x < mo.x + mo.width &&
+            this.y < mo.y + mo.height;
         return isColliding;
     }
 
@@ -87,6 +87,14 @@ class MoveableObject extends DrawableObject {
             this.energy = 0;
         } else {
             this.lastHit = new Date().getTime();
+        }
+    }
+
+    hitWithBottle() {
+        this.energy -= 20;
+        if (this.energy <= 0) {
+            this.energy = 0;
+            console.log('DEAD');
         }
     }
 
