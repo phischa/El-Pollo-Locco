@@ -59,8 +59,11 @@ class MoveableObject extends DrawableObject {
     }
 
     isCollidingBoss(mo) {
-        return this.x + this.width - this.offset.right > mo.x &&
-            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
+        const isColliding = mo.collidable && this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x + mo.width &&
+            this.y < mo.y + mo.height;
+        return isColliding;
     }
     /* isColliding(mo) {
         return this.x + this.width > mo.x &&
@@ -91,9 +94,9 @@ class MoveableObject extends DrawableObject {
     }
 
     hitWithBottle() {
-        this.energy -= 20;
-        if (this.energy <= 0) {
-            this.energy = 0;
+        this.endboss.energy -= 20;
+        if (this.endboss.energy <= 0) {
+            this.endboss.energy = 0;
             console.log('DEAD');
         }
     }
