@@ -175,9 +175,6 @@ class World {
             if (this.bossIsAttacked(boss)) {
                 boss.energy -= 20;
                 this.statusBarBoss.setPercentage(boss.energy);
-                if (boss.energy <= 0) {
-                    bossDies(boss);
-                }
             }
         });
     };
@@ -211,10 +208,6 @@ class World {
     enemyDies(enemy) {
         enemy.energy--;
         this.character.jump();
-    }
-
-    bossDies(boss) {
-        
     }
 
     /**

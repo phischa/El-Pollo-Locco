@@ -66,6 +66,7 @@ class Endboss extends MoveableObject {
         this.visible = true;
         this.collidable = true;
         this.animate();
+        /* this.animateHurt(); */
     }
 
     animate() {
@@ -86,6 +87,14 @@ class Endboss extends MoveableObject {
             }
         }, 200);
     }
+
+    /* animateHurt() {
+        if () {
+            this.playAnimation(this.IMAGES_HURT);
+        } else if (this.bossDies(boss)) {
+            this.playAnimation(this.IMAGES_DEAD);
+        }
+    } */
 
     attack() {
         if (this.hadFirstContact) {
