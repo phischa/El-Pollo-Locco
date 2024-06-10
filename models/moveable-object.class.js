@@ -93,14 +93,6 @@ class MoveableObject extends DrawableObject {
         }
     }
 
-    hitWithBottle() {
-        this.endboss.energy -= 20;
-        if (this.endboss.energy <= 0) {
-            this.endboss.energy = 0;
-            console.log('DEAD');
-        }
-    }
-
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
         timePassed = timePassed / 1000; //Difference in s
