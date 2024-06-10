@@ -111,7 +111,7 @@ class World {
     runBottleCheck() {
         setInterval(() => {
             this.checkBottleAttack();
-        }, 380);
+        }, 400);
     }
 
     checkCollisions() {
@@ -173,11 +173,28 @@ class World {
     checkBottleAttack() {
         this.endboss.forEach((boss) => {
             if (this.bossIsAttacked(boss)) {
+                console.log('AUA');
                 boss.energy -= 20;
                 this.statusBarBoss.setPercentage(boss.energy);
             }
         });
     };
+
+    /* hitWithBottle() {
+        this.endboss.energy -= 20;
+        if (this.endboss.energy <= 0) {
+            this.endboss.energy = 0;
+            console.log('DEAD');
+        }
+    } */
+
+    /* hitWithBottle() {
+        this.endboss.energy -= 20;
+        if (this.endboss.energy <= 0) {
+            this.endboss.energy = 0;
+            console.log('DEAD');
+        }
+    } */
 
     /**
  * Returns a true or false statement for attack against enemies.
