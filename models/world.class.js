@@ -30,6 +30,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.runBottleCheck();
         /* this.initAudioContext(); */
     }
 
@@ -104,9 +105,14 @@ class World {
             this.checkCollectionCoin();
             this.checkThrowObjects();
             this.checkJumpAttack();
-            this.checkBottleAttack();
         }, 200);
     };
+
+    runBottleCheck() {
+        setInterval(() => {
+            this.checkBottleAttack();
+        }, 350);
+    }
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
@@ -169,11 +175,7 @@ class World {
             if (this.bossIsAttacked(boss)) {
                 console.log('AUA');
                 boss.energy -= 20;
-                if (boss.energy <= 0) {
-                    boss.energy = 0;
-                    console.log('DEAD');
-                }
-                /* this.endboss.hitWithBottle(boss); */
+                this.statusBarBoss.setPercentage(boss.energy);
             }
         });
     };
