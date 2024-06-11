@@ -5,7 +5,10 @@ class Endboss extends MoveableObject {
     width = 250;
     hadFirstContact = false;
     bossAlert;
+    bossAttackInterval;
+    bossDeadInterval;
     bossHurt = false;
+
     offset = {
         top: 60,
         right: 10,
@@ -67,6 +70,8 @@ class Endboss extends MoveableObject {
         this.visible = true;
         this.collidable = true;
         this.animate();
+        this.animateHurt();
+        this.animateDead();
     }
 
     animate() {
@@ -81,7 +86,7 @@ class Endboss extends MoveableObject {
                 this.attack();
             }
             i++;
-            if (world.character.x > 1640 && !this.hadFirstContact) {
+            if (world.character.x > 1600 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
             }
@@ -91,31 +96,38 @@ class Endboss extends MoveableObject {
     attack() {
         if (this.hadFirstContact) {
             clearInterval(this.bossAlert);
-            let bossAttackInterval = setInterval(() => {
+            this.bossAttackInterval = setInterval(() => {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.moveLeft();
-                this.animateHurt();
             }, 200);
-
         }
     }
 
     animateHurt() {
-        let bossDeadInterval = setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                setTimeout(() => {
-                    this.endGame(bossDeadInterval);
-                }, 1000);
-            } else if (this.bossHurt) {
+        this.bossHurtInterval = setInterval(() => {
+            if (this.bossHurt) {
                 clearInterval(this.bossAttackInterval);
                 this.playAnimation(this.IMAGES_HURT);
+                this.attack();
             }
         }, 200);
     }
 
-    endGame(bossDeadInterval) {
-        clearInterval(bossDeadInterval);
-        document.getElementById('end-screen').style.display = 'flex';
+    animateDead() {
+        this.bossDeadInterval = setInterval(() => {
+            if (this.isDead()) {
+                clearInterval(this.bossAttackInterval);
+                clearInterval(this.bossHurtInterval);
+                this.playAnimation(this.IMAGES_DEAD);
+                setTimeout(() => {
+                    this.winGame();
+                }, 2000);
+            }
+        }, 200);
+    }
+
+    winGame() {
+        clearInterval(this.bossDeadInterval);
+        document.getElementById('win-screen').style.display = 'flex';
     }
 }

@@ -65,6 +65,7 @@ window.addEventListener('keyup', (e) => {
         initLevel();
         playMusic();
         document.getElementById('end-screen').style.display = 'none';
+        document.getElementById('win-screen').style.display = 'none';
         document.getElementById('canvas').style.display = 'block';
         world = new World(canvas, keyboard);
     } 
