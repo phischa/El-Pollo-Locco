@@ -5,6 +5,7 @@ class Endboss extends MoveableObject {
     width = 250;
     hadFirstContact = false;
     bossAlert;
+    bossHurt = false;
     offset = {
         top: 60,
         right: 10,
@@ -66,7 +67,6 @@ class Endboss extends MoveableObject {
         this.visible = true;
         this.collidable = true;
         this.animate();
-        /* this.animateHurt(); */
     }
 
     animate() {
@@ -88,21 +88,34 @@ class Endboss extends MoveableObject {
         }, 200);
     }
 
-    /* animateHurt() {
-        if () {
-            this.playAnimation(this.IMAGES_HURT);
-        } else if (this.bossDies(boss)) {
-            this.playAnimation(this.IMAGES_DEAD);
-        }
-    } */
-
     attack() {
         if (this.hadFirstContact) {
             clearInterval(this.bossAlert);
-            setInterval(() => {
+            let bossAttackInterval = setInterval(() => {
                 this.playAnimation(this.IMAGES_WALKING);
                 this.moveLeft();
-            }, 150);
+                this.animateHurt();
+            }, 200);
+
         }
+    }
+
+    animateHurt() {
+        let bossDeadInterval = setInterval(() => {
+            if (this.isDead()) {
+                this.playAnimation(this.IMAGES_DEAD);
+                setTimeout(() => {
+                    this.endGame(bossDeadInterval);
+                }, 1000);
+            } else if (this.bossHurt) {
+                clearInterval(this.bossAttackInterval);
+                this.playAnimation(this.IMAGES_HURT);
+            }
+        }, 200);
+    }
+
+    endGame(bossDeadInterval) {
+        clearInterval(bossDeadInterval);
+        document.getElementById('end-screen').style.display = 'flex';
     }
 }

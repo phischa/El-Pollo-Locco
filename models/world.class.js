@@ -54,9 +54,9 @@ class World {
 
         this.addToMap(this.character);
 
-        this.addObjectsToMap(this.level.collectableObjects);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.collectableObjects);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects)
 
@@ -174,7 +174,11 @@ class World {
         this.endboss.forEach((boss) => {
             if (this.bossIsAttacked(boss)) {
                 boss.energy -= 20;
+                boss.bossHurt = true;
                 this.statusBarBoss.setPercentage(boss.energy);
+                setTimeout(() => {
+                    boss.bossHurt = false;
+                }, 1000);
             }
         });
     };
