@@ -33,8 +33,7 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     
-    drawFrame(ctx) {
-
+    /* drawFrame(ctx) {
         if (this instanceof Character || this instanceof CollectableObject || this instanceof ThrowableObject || this instanceof Coin || this instanceof Chicken || this instanceof Chicks || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '2';
@@ -42,13 +41,5 @@ class DrawableObject {
             ctx.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right, this.height - this.offset.bottom);
             ctx.stroke();
         }
-
-        /* if (this instanceof Character || this instanceof Chicken || this instanceof Chicks || this instanceof CollectableObject || this instanceof Coin) {
-            ctx.beginPath();
-            ctx.lineWidth = '2';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        } */
-    }
+    } */
 }

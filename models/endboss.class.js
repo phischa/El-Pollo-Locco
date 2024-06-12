@@ -128,6 +128,7 @@ class Endboss extends MoveableObject {
 
     winGame() {
         clearInterval(this.bossDeadInterval);
+        music.pause();
         document.getElementById('win-screen').style.display = 'flex';
     }
 }

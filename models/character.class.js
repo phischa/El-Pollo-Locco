@@ -4,7 +4,9 @@ class Character extends MoveableObject {
     height = 300;
     y = 40;
     speed = 5;
-    walking_sound = new Audio('audio/walking.mp3');
+    walkingSound = new Audio('audio/walking.mp3');
+    walkingInterval;
+    walkingSoundInterval;
 
     offset = {
         top: 110,
@@ -64,7 +66,7 @@ class Character extends MoveableObject {
     }
 
     animateWalk() {
-        setInterval(() => {
+        this.walkingInterval = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
@@ -78,11 +80,11 @@ class Character extends MoveableObject {
     }
 
     changeWalkingSound() {
-        setInterval(() => {
+        this.walkingSoundInterval = setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isAboveGround() || this.world.keyboard.LEFT && this.x > 0 && !this.isAboveGround()) {
-                this.playWalkingSound();
+                this.walkingSound.play();
             } else {
-                this.pauseWalkingSound();
+                this.walkingSound.pause()
             }
             this.world.camera_x = -this.x + 80;
         }, 1000 / 120);
@@ -113,20 +115,6 @@ class Character extends MoveableObject {
         }, 1000 / 120);
     }
 
-    playWalkingSound() {
-        this.walking_sound.play();
-
-        /* if (this.walking_sound.paused) {
-            this.walking_sound.play().catch(error => {
-                console.error('Fehler beim Abspielen des Sounds:', error);
-            });
-            this.walking_sound.addEventListener('ended', () => {
-                this.walking_sound.currentTime = 0;
-                this.walking_sound.play();
-            });
-        } */
-    }
-
     collisionWithBottle(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height > mo.y &&
@@ -139,16 +127,16 @@ class Character extends MoveableObject {
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
-    pauseWalkingSound() {
-        this.walking_sound.pause();
-    }
-
     jump() {
         this.speedY = 25;
     }
 
     endGame(animeInterval) {
         clearInterval(animeInterval);
+        music.pause();
+        clearInterval(this.walkingSoundInterval);
+        clearInterval(this.walkingInterval)
         document.getElementById('end-screen').style.display = 'flex';
+        
     }
 }

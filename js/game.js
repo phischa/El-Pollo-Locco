@@ -82,10 +82,6 @@ window.addEventListener('keyup', (e) => {
         }
     }
 
-    function pauseMusic() {
-        music.volume = 0.0;
-    }
-
     function muteSounds() {
         let img = document.getElementById('volume');
         if (mute === false) {

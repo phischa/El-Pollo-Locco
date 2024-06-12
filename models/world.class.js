@@ -23,6 +23,8 @@ class World {
     throwableObjects = [];
     chickenIsDead = false;
 
+    coinSound = new Audio('audio/coin.mp3')
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -39,11 +41,9 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-
         this.ctx.translate(-this.camera_x, 0); // for fixed statusBar
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
@@ -55,20 +55,18 @@ class World {
 
     drawMoveables() {
         this.addToMap(this.character);
-
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.collectableObjects);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.throwableObjects)
-
         this.ctx.translate(-this.camera_x, 0);
-
         let self = this;
         requestAnimationFrame(function () {
             self.draw();
         });
     }
+
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -80,7 +78,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        /* mo.drawFrame(this.ctx); */
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -147,6 +145,7 @@ class World {
     checkCollectionCoin() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.collisionWithCoin(coin)) {
+                /* this.playCoinSound(); */
                 this.coinNumber++;
                 this.statusBarCoin.setCoins(this.coinNumber);
                 return false; // Remove the collected object from the array
@@ -154,6 +153,13 @@ class World {
             return true; // Keep the uncollected object
         });
     }
+
+    /* playCoinSound() {
+        this.coinSound.play();
+        setTimeout(() => {
+            this.coinSound.pause();
+        }, 500);
+    } */
 
     /**
     * Checks for attacks against enemies and initiates death animation.
@@ -169,11 +175,39 @@ class World {
     };
 
     /**
+    * Returns a true or false statement for attack against enemies.
+    * @param {Object} enemy Enemy object from the enemies array
+    * @returns  boolean statement to check collision with enemies from above during attack
+    */
+    chickenIsAttacked(enemy) {
+        return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead();
+    }
+
+    /* checkBottleAttack() {
+        this.endboss.forEach((boss) => {
+            if (this.bossIsAttacked(boss)) {
+                this.throwableObjects.forEach((throwableObject) => {
+                    if (throwableObject.isCollidingBoss(boss)) {
+                        throwableObject.splash = true; // Set the splash property of the throwable object to true
+                        boss.energy -= 20;
+                        boss.bossHurt = true;
+                        this.statusBarBoss.setPercentage(boss.energy);
+                        setTimeout(() => {
+                            boss.bossHurt = false;
+                        }, 1000);
+                    }
+                });
+            }
+        });
+    }; */
+
+    /**
     * Checks for attacks against endboss.
     */
     checkBottleAttack() {
         this.endboss.forEach((boss) => {
             if (this.bossIsAttacked(boss)) {
+                this.throwableObjects.splash = true;
                 boss.energy -= 20;
                 boss.bossHurt = true;
                 this.statusBarBoss.setPercentage(boss.energy);
@@ -182,23 +216,6 @@ class World {
                 }, 1000);
             }
         });
-    };
-
-    /* hitWithBottle() {
-        this.endboss.energy -= 20;
-        if (this.endboss.energy <= 0) {
-            this.endboss.energy = 0;
-            console.log('DEAD');
-        }
-    } */
-
-    /**
- * Returns a true or false statement for attack against enemies.
- * @param {Object} enemy Enemy object from the enemies array
- * @returns  boolean statement to check collision with enemies from above during attack
- */
-    chickenIsAttacked(enemy) {
-        return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead();
     }
 
     bossIsAttacked(boss) {
