@@ -58,27 +58,32 @@ class Character extends MoveableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.applyGravity();
         this.animateWalk();
+        this.changeWalkingSound();
         this.switchAnimation();
         this.animateJump();
     }
 
     animateWalk() {
         setInterval(() => {
-            /* this.walking_sound.pause(); */
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
+            } 
+            if (this.world.keyboard.LEFT && this.x > 0) {
+                this.moveLeft();
+                this.otherDirection = true;
+            }
+            this.world.camera_x = -this.x + 80;
+        }, 1000 / 120);
+    }
+
+    changeWalkingSound() {
+        setInterval(() => {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isAboveGround() || this.world.keyboard.LEFT && this.x > 0 && !this.isAboveGround()) {
                 this.playWalkingSound();
             } else {
                 this.pauseWalkingSound();
             }
-            if (this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-                this.playWalkingSound();
-            } /* else {
-                this.pauseWalkingSound();
-            } */
             this.world.camera_x = -this.x + 80;
         }, 1000 / 120);
     }
@@ -109,7 +114,9 @@ class Character extends MoveableObject {
     }
 
     playWalkingSound() {
-        if (this.walking_sound.paused) {
+        this.walking_sound.play();
+
+        /* if (this.walking_sound.paused) {
             this.walking_sound.play().catch(error => {
                 console.error('Fehler beim Abspielen des Sounds:', error);
             });
@@ -117,7 +124,7 @@ class Character extends MoveableObject {
                 this.walking_sound.currentTime = 0;
                 this.walking_sound.play();
             });
-        }
+        } */
     }
 
     collisionWithBottle(mo) {
@@ -133,7 +140,7 @@ class Character extends MoveableObject {
     }
 
     pauseWalkingSound() {
-        this.walking_sound.volume = 0;
+        this.walking_sound.pause();
     }
 
     jump() {

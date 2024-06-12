@@ -31,7 +31,6 @@ class World {
         this.setWorld();
         this.run();
         this.runBottleCheck();
-        /* this.initAudioContext(); */
     }
 
     setWorld() {
@@ -51,7 +50,10 @@ class World {
         this.addToMap(this.statusBarBottle);
         this.addToMap(this.statusBarBoss);
         this.ctx.translate(this.camera_x, 0); // for fixed statusBar
+        this.drawMoveables();
+    }
 
+    drawMoveables() {
         this.addToMap(this.character);
 
         this.addObjectsToMap(this.level.coins);
@@ -67,7 +69,6 @@ class World {
             self.draw();
         });
     }
-
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -190,7 +191,6 @@ class World {
             console.log('DEAD');
         }
     } */
-
 
     /**
  * Returns a true or false statement for attack against enemies.
