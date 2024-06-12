@@ -183,24 +183,6 @@ class World {
         return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead();
     }
 
-    /* checkBottleAttack() {
-        this.endboss.forEach((boss) => {
-            if (this.bossIsAttacked(boss)) {
-                this.throwableObjects.forEach((throwableObject) => {
-                    if (throwableObject.isCollidingBoss(boss)) {
-                        throwableObject.splash = true; // Set the splash property of the throwable object to true
-                        boss.energy -= 20;
-                        boss.bossHurt = true;
-                        this.statusBarBoss.setPercentage(boss.energy);
-                        setTimeout(() => {
-                            boss.bossHurt = false;
-                        }, 1000);
-                    }
-                });
-            }
-        });
-    }; */
-
     /**
     * Checks for attacks against endboss.
     */
@@ -238,8 +220,12 @@ class World {
         if (this.keyboard.KeyD && this.bottleNumber > 0) {
             this.bottleNumber--;
             this.statusBarBottle.setBottles(this.bottleNumber);
+            this.character.isThrowing = true; // Set throwing flag
             this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(this.bottle);
+            setTimeout(() => {
+                this.character.isThrowing = false; // Reset throwing flag after a duration
+            }, 200); // Adjust the duration as needed
         }
     }
 }

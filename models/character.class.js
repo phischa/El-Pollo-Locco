@@ -8,7 +8,8 @@ class Character extends MoveableObject {
     walkingInterval;
     walkingSoundInterval;
     inactivityTimeout;
-    inactivityTime = 0; // Add this variable to track inactivity time
+    inactivityTime = 0; // Track inactivity time
+    isThrowing = false; // Flag to indicate throwing action
 
     offset = {
         top: 110,
@@ -119,8 +120,8 @@ class Character extends MoveableObject {
     }
 
     updateInactivityTime() {
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            this.inactivityTime = 0; // Reset inactivity time on movement
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.isThrowing) {
+            this.inactivityTime = 0; // Reset inactivity time on movement or throwing
         } else {
             this.inactivityTime += 1000 / 120; // Increment inactivity time
         }
@@ -167,12 +168,16 @@ class Character extends MoveableObject {
     }
 
     playIdleAnimation() {
-        if (this.inactivityTime >= 6000) {
-            this.playAnimation(this.IMAGES_LONG_IDLE);
-        } else if (this.inactivityTime >= 3000) {
-            this.playAnimation(this.IMAGES_IDLE);
-        } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-            this.playAnimation(this.IMAGES_WALKING);
+        if (!this.isThrowing) {
+            if (this.inactivityTime >= 6000) {
+                this.playAnimation(this.IMAGES_LONG_IDLE);
+            } else if (this.inactivityTime >= 3000) {
+                this.playAnimation(this.IMAGES_IDLE);
+            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+                this.playAnimation(this.IMAGES_WALKING);
+            } 
+        } else {
+            this.loadImage('img/2_character_pepe/2_walk/W-21.png');
         }
     }
 
@@ -208,4 +213,5 @@ class Character extends MoveableObject {
         document.getElementById('end-screen').style.display = 'flex';
     }
 }
+
 
