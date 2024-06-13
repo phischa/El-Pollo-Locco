@@ -19,12 +19,20 @@ class StatusBarBottle extends DrawableObject {
         this.setBottles(0);
     }
 
+    /**
+ * Sets the number of bottles and updates the image accordingly.
+ * @param {number} bottleNumber - The number of bottles to set.
+ */
     setBottles(bottleNumber) {
         this.bottleNumber = bottleNumber;
         let path = this.IMAGES_BOTTLE[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Resolves the image index based on the current number of bottles.
+     * @returns {number} The index of the image corresponding to the current number of bottles.
+     */
     resolveImageIndex() {
         if (this.bottleNumber == 0) {
             return 0;
@@ -40,4 +48,5 @@ class StatusBarBottle extends DrawableObject {
             return 5;
         }
     }
+
 }

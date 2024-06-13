@@ -1,5 +1,8 @@
 let isFullscreen = false;
 
+/**
+ * Toggles fullscreen mode for the main container element.
+ */
 function fullscreen() {
     if (isFullscreen === false) {
         enterFullscreen();
@@ -8,9 +11,12 @@ function fullscreen() {
     }
 }
 
+/**
+ * Requests fullscreen mode for the main container element.
+ */
 function enterFullscreen() {
     const element = document.getElementById('main-container'); // Get the main-container element
-    isFullscreen = true;
+    isFullscreen = true; // Update fullscreen state
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.msRequestFullscreen) {
@@ -20,12 +26,15 @@ function enterFullscreen() {
     }
 }
 
+/**
+ * Exits fullscreen mode.
+ */
 function exitFullscreen() {
-    isFullscreen = false;
+    isFullscreen = false; // Update fullscreen state
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
         document.webkitExitFullscreen();
     }
 }
-    
+

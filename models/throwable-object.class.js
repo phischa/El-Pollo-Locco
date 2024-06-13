@@ -34,19 +34,27 @@ class ThrowableObject extends MoveableObject {
         this.throw(x, y);
     }
 
+    /**
+  * Throws the object with given coordinates.
+  * @param {number} x - The x-coordinate to throw the object to.
+  * @param {number} y - The y-coordinate to throw the object to.
+  */
     throw(x, y) {
         this.speedY = 20;
         this.applyGravity();
         this.movingInterval = setInterval(() => {
-            this.x += 18;
+            this.x += 18; 
         }, 25);
         this.rotationInterval = setInterval(() => {
             if (!this.splash) {
                 this.playAnimation(this.IMAGES_ROTATION);
             }
-        }, 1000 / 120);
+        }, 1000 / 120); 
     }
 
+    /**
+     * Plays the splash animation when the object hits water.
+     */
     playSplash() {
         this.speedY = -38;
         clearInterval(this.rotationInterval);
@@ -56,7 +64,6 @@ class ThrowableObject extends MoveableObject {
         }, 1000 / 60);
         setTimeout(() => {
             clearInterval(this.splashInterval);
-            // You can remove the object or stop the splash animation after a certain period
-        }, this.IMAGES_SPLASH.length * 20); // assuming each frame lasts 100ms
+        }, this.IMAGES_SPLASH.length * 20);
     }
 }

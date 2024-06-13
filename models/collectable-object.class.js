@@ -24,6 +24,9 @@ class CollectableObject extends MoveableObject {
         this.switchAnimation();
     }
 
+    /**
+     * Switches the bottle images.
+     */
     switchAnimation() {
         setInterval(() => {
             this.playAnimation(this.BOTTLE_SOIL);

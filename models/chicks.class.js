@@ -34,23 +34,29 @@ class Chicks extends Chicken {
         this.animateWalk();
     }
 
+    /**
+ * Switches the animation between walking and dead states.
+ */
+switchAnimation() {
+    setInterval(() => {
+        if (this.chickenIsDead()) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.stopMovement();
+            this.stopPlayAnimation();
+        } else {
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+    }, 150);
+}
 
-    switchAnimation() {
-        setInterval(() => {
-            if (this.chickenIsDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                this.stopMovement();
-                this.stopPlayAnimation();
-            } else {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
-        }, 150);
-    }
+/**
+ * Stops the animation of the chicken and makes it invisible after a delay.
+ */
+stopPlayAnimation() {
+    setTimeout(() => {
+        this.visible = false; // Set the visible property to false after 1 second
+        this.collidable = false;
+    }, 1000);
+}
 
-    stopPlayAnimation() {
-        setTimeout(() => {
-            this.visible = false; // Set the visible property to false after 1 second
-            this.collidable = false;
-        }, 1000);
-    }
 }

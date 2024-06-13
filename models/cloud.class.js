@@ -10,6 +10,9 @@ class Cloud extends MoveableObject {
         this.moveCloud();
     }
 
+    /**
+     * Moves the clouds to the left.
+     */
     moveCloud() {
         setInterval(() => {
             this.moveLeft();

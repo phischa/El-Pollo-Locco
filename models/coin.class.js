@@ -26,6 +26,9 @@ class Coin extends MoveableObject {
         this.switchAnimation();
     }
 
+    /**
+     * Switches the coin images.
+     */
     switchAnimation() {
         setInterval(() => {
             this.playAnimation(this.COIN);

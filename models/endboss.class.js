@@ -74,10 +74,16 @@ class Endboss extends MoveableObject {
         this.animateDead();
     }
 
+    /**
+  * Starts the boss alert animation logic.
+  */
     animate() {
         this.bossAlert = setInterval(this.animateLogic.bind(this), 200);
     }
-    
+
+    /**
+     * The logic for the boss animations, changing states based on certain conditions.
+     */
     animateLogic() {
         if (!this.hadFirstContact && world.character.x > 1500) {
             this.hadFirstContact = true;
@@ -94,6 +100,9 @@ class Endboss extends MoveableObject {
         this.i++;
     }
 
+    /**
+     * Initiates the boss attack behavior.
+     */
     attack() {
         if (this.hadFirstContact) {
             clearInterval(this.bossAlert);
@@ -104,6 +113,9 @@ class Endboss extends MoveableObject {
         }
     }
 
+    /**
+     * Animates the boss hurt state and resumes attack after being hurt.
+     */
     animateHurt() {
         this.bossHurtInterval = setInterval(() => {
             if (this.bossHurt) {
@@ -114,6 +126,9 @@ class Endboss extends MoveableObject {
         }, 200);
     }
 
+    /**
+     * Animates the boss dead state and triggers the win game sequence.
+     */
     animateDead() {
         this.bossDeadInterval = setInterval(() => {
             if (this.isDead()) {
@@ -122,11 +137,14 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
                     this.winGame();
-                }, 2000);
+                }, 3000);
             }
         }, 200);
     }
 
+    /**
+     * Ends the game with a win screen and stops all boss animations.
+     */
     winGame() {
         clearInterval(this.bossDeadInterval);
         clearInterval(this.bossHurtInterval);

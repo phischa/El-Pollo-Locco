@@ -21,6 +21,10 @@ class StatusBarCoin extends DrawableObject {
         this.setCoins(0);
     }
 
+    /**
+ * Sets the number of coins and updates the image accordingly.
+ * @param {number} coinNumber - The number of coins to set.
+ */
     setCoins(coinNumber) {
         if (coinNumber > 0) {
             this.playCoinSound();
@@ -30,6 +34,10 @@ class StatusBarCoin extends DrawableObject {
         this.img = this.imageCache[path];
     }
 
+    /**
+     * Resolves the image index based on the current number of coins.
+     * @returns {number} The index of the image corresponding to the current number of coins.
+     */
     resolveImageIndex() {
         if (this.coinNumber == 0) {
             return 0;
@@ -46,6 +54,9 @@ class StatusBarCoin extends DrawableObject {
         }
     }
 
+    /**
+     * Plays the coin sound and resumes background music after a short delay.
+     */
     playCoinSound() {
         this.coinSound.play();
         setTimeout(() => {
@@ -55,4 +66,5 @@ class StatusBarCoin extends DrawableObject {
             music.play();
         }, 301);
     }
+
 }

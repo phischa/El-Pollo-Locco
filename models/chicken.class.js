@@ -34,6 +34,9 @@ class Chicken extends MoveableObject {
         this.animateWalk();
     }
 
+    /**
+ * Animates the walking of the chicken by moving it to the left.
+ */
     animateWalk() {
         this.chickenInterval = setInterval(() => {
             if (this.visible) { // Only move if the chicken is visible
@@ -43,6 +46,9 @@ class Chicken extends MoveableObject {
         this.switchAnimation();
     }
 
+    /**
+     * Switches the animation between walking and dead states.
+     */
     switchAnimation() {
         setInterval(() => {
             if (this.chickenIsDead()) {
@@ -55,17 +61,24 @@ class Chicken extends MoveableObject {
         }, 150);
     }
 
+    /**
+     * Checks if the chicken is dead.
+     * @returns {boolean} True if the chicken's energy is 0, false otherwise.
+     */
     chickenIsDead() {
         return this.energy === 0;
     }
 
     /**
-     * stops movement interval
+     * Stops the movement interval of the chicken.
      */
     stopMovement() {
         clearInterval(this.chickenInterval);
     }
 
+    /**
+     * Stops the animation of the chicken and makes it invisible after a delay.
+     */
     stopPlayAnimation() {
         this.collidable = false;
         setTimeout(() => {
@@ -73,6 +86,10 @@ class Chicken extends MoveableObject {
         }, 500);
     }
 
+    /**
+     * Draws the chicken on the canvas context.
+     * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
+     */
     draw(ctx) {
         if (this.visible) { // Draw the chicken only if it's visible
             super.draw(ctx);
