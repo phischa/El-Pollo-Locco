@@ -66,7 +66,7 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.speed = 20;
         this.energy = 100;
-        this.x = 2400;
+        this.x = 2300;
         this.visible = true;
         this.collidable = true;
         this.animate();
@@ -75,22 +75,23 @@ class Endboss extends MoveableObject {
     }
 
     animate() {
-        let i = 0;
-        this.bossAlert = setInterval(() => {
-            if (i < 4) {
-                this.playAnimation(this.IMAGES_WALKING);
-            } else if (i < 12) {
-                this.playAnimation(this.IMAGES_ALERT);
-            } else if (i < 20) {
-                this.playAnimation(this.IMAGES_ATTACK);
-                this.attack();
-            }
-            i++;
-            if (world.character.x > 1500 && !this.hadFirstContact) {
-                i = 0;
-                this.hadFirstContact = true;
-            }
-        }, 200);
+        this.bossAlert = setInterval(this.animateLogic.bind(this), 200);
+    }
+    
+    animateLogic() {
+        if (!this.hadFirstContact && world.character.x > 1500) {
+            this.hadFirstContact = true;
+            this.i = 0;
+        }
+        if (this.i < 4) {
+            this.playAnimation(this.IMAGES_WALKING);
+        } else if (this.i < 12) {
+            this.playAnimation(this.IMAGES_ALERT);
+        } else if (this.i < 20) {
+            this.playAnimation(this.IMAGES_ATTACK);
+            this.attack();
+        }
+        this.i++;
     }
 
     attack() {

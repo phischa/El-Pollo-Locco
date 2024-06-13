@@ -9,6 +9,10 @@ class MoveableObject extends DrawableObject {
     lastHit = 0;
     play;
 
+    /**
+     * Plays an animation by cycling through the given images.
+     * @param {string[]} images - Array of image paths.
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
@@ -16,20 +20,33 @@ class MoveableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    /**
+     * Starts playing an animation at a set interval.
+     * @param {string[]} images - Array of image paths.
+     */
     play(images) {
         this.playInterval = setInterval(() => {
             this.playAnimation(images);
         }, 500);
     }
 
+    /**
+     * Moves the object to the right.
+     */
     moveRight() {
         this.x += this.speed;
     }
 
+    /**
+     * Moves the object to the left.
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
+    /**
+     * Applies gravity to the object.
+     */
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -42,6 +59,10 @@ class MoveableObject extends DrawableObject {
         }, 1000 / 25);
     }
 
+    /**
+     * Checks if the object is above the ground.
+     * @returns {boolean} True if the object is above the ground, false otherwise.
+     */
     isAboveGround() {
         if (this instanceof ThrowableObject) { //Throwable Object should always fall
             return true;
@@ -50,6 +71,11 @@ class MoveableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Checks if the object is colliding with another object.
+     * @param {MoveableObject} mo - The other moveable object.
+     * @returns {boolean} True if the objects are colliding, false otherwise.
+     */
     isColliding(mo) {
         const isColliding = mo.collidable && this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -58,6 +84,11 @@ class MoveableObject extends DrawableObject {
         return isColliding;
     }
 
+    /**
+     * Checks if the object is colliding with a boss object.
+     * @param {MoveableObject} mo - The boss moveable object.
+     * @returns {boolean} True if the objects are colliding, false otherwise.
+     */
     isCollidingBoss(mo) {
         const isColliding = this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
@@ -66,6 +97,9 @@ class MoveableObject extends DrawableObject {
         return isColliding;
     }
 
+    /**
+     * Reduces the object's energy when hit.
+     */
     hit() {
         this.energy -= 10;
         if (this.energy <= 0) {
@@ -75,12 +109,20 @@ class MoveableObject extends DrawableObject {
         }
     }
 
+    /**
+     * Checks if the object is hurt (i.e., hit within the last second).
+     * @returns {boolean} True if the object is hurt, false otherwise.
+     */
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
         timePassed = timePassed / 1000; //Difference in s
         return timePassed < 1;
     }
 
+    /**
+     * Checks if the object is dead (i.e., energy is 0).
+     * @returns {boolean} True if the object is dead, false otherwise.
+     */
     isDead() {
         return this.energy == 0;
     }
