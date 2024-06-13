@@ -229,7 +229,7 @@ span {
     }
 
     h1 {
-        display: none;
+        display: block;
     }
 }
 
