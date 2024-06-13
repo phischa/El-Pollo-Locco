@@ -110,7 +110,7 @@ class World {
     runBottleCheck() {
         setInterval(() => {
             this.checkBottleAttack();
-        }, 400);
+        }, 325);
     }
 
     checkCollisions() {
@@ -184,9 +184,62 @@ class World {
     }
 
     /**
+     * Checks if Character has enough bottles to throw.
+     */
+    checkThrowObjects() {
+        if (this.keyboard.KeyD && this.bottleNumber > 0) {
+            this.bottleNumber--;
+            this.statusBarBottle.setBottles(this.bottleNumber);
+            this.character.isThrowing = true; 
+            this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(this.bottle);
+            setTimeout(() => {
+                this.character.isThrowing = false;
+            }, 200); 
+        }
+    }
+
+    checkBottleAttack() {
+        this.endboss.forEach((boss) => {
+            this.throwableObjects.forEach((throwableObject) => {
+                if (throwableObject.isCollidingBoss(boss)) {
+                    throwableObject.splash = true; // Set splash to true
+                    throwableObject.playSplash();  // Play splash animation
+                    boss.energy -= 20;
+                    boss.bossHurt = true;
+                    this.statusBarBoss.setPercentage(boss.energy);
+                    setTimeout(() => {
+                        boss.bossHurt = false;
+                    }, 1000);
+                }
+            });
+        });
+    }
+
+    /* checkBottleAttack() {
+    this.endboss.forEach((boss) => {
+        if (this.bossIsAttacked(boss)) {
+            this.throwableObjects.forEach((throwableObject) => {
+                if (throwableObject.isCollidingBoss(boss)) {
+                    throwableObject.splash = true;
+                    throwableObject.playSplash();
+                    boss.energy -= 20;
+                    boss.bossHurt = true;
+                    this.statusBarBoss.setPercentage(boss.energy);
+                    setTimeout(() => {
+                        throwableObject.splash = false;
+                        boss.bossHurt = false;
+                    }, 3000); 
+                }
+            });
+        }
+    });
+} */
+
+    /**
     * Checks for attacks against endboss.
     */
-    checkBottleAttack() {
+    /* checkBottleAttack() {
         this.endboss.forEach((boss) => {
             if (this.bossIsAttacked(boss)) {
                 this.throwableObjects.splash = true;
@@ -194,11 +247,14 @@ class World {
                 boss.bossHurt = true;
                 this.statusBarBoss.setPercentage(boss.energy);
                 setTimeout(() => {
+                    this.throwableObjects.splash = false;
+                }, 3000); 
+                setTimeout(() => {
                     boss.bossHurt = false;
                 }, 1000);
             }
         });
-    }
+    } */
 
     bossIsAttacked(boss) {
         return this.throwableObjects.some((throwableObject) => throwableObject.isCollidingBoss(boss));
@@ -211,21 +267,5 @@ class World {
     enemyDies(enemy) {
         enemy.energy--;
         this.character.jump();
-    }
-
-    /**
-     * Checks if Character has enough bottles to throw.
-     */
-    checkThrowObjects() {
-        if (this.keyboard.KeyD && this.bottleNumber > 0) {
-            this.bottleNumber--;
-            this.statusBarBottle.setBottles(this.bottleNumber);
-            this.character.isThrowing = true; // Set throwing flag
-            this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(this.bottle);
-            setTimeout(() => {
-                this.character.isThrowing = false; // Reset throwing flag after a duration
-            }, 200); // Adjust the duration as needed
-        }
     }
 }
