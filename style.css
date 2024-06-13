@@ -205,3 +205,139 @@ span {
 .volume img:hover {
     transform: scale(1.2);
 }
+
+@media only screen and (min-width: 720px) {
+    #buttonOverlayScreen {
+        display: none;
+    }
+}
+
+/* Smartphone */
+
+@media only screen and (max-width: 720px) {
+    body {
+        display: block;
+        background: none;
+    }
+
+    .fullscreen {
+        display: none;
+    }
+
+    .volume {
+        position: absolute;
+        top: 30;
+        right: 20;
+        margin: 10px;
+    }
+
+    #mainScreen,
+    #startScreen,
+    #buttonOverlayScreen,
+    canvas {
+        width: 100%;
+        height: 100vh;
+    }
+
+    #turnDisplay {
+        z-index: 100;
+        height: 100vh;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+
+    #turnDisplay {
+        text-align: center;
+    }
+
+
+    #sideMenu,
+    h1 {
+        display: none;
+    }
+
+    #mobileActionButtons {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0px 80px;
+        position: absolute;
+        bottom: 5%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #mobileActionButtons div {
+        display: flex;
+        gap: 32px;
+    }
+
+    #mobileActionButtons img {
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+    }
+
+    #bottle {
+        height: 50px !important;
+        width: 50px !important;
+        padding: 5px !important;
+        rotate: 30deg;
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    body {
+        display: block;
+    }
+
+    #mainScreen,
+    #startScreen,
+    #buttonOverlayScreen,
+    canvas {
+        height: 100vh;
+        width: 100%;
+    }
+
+    #sideMenu {
+        display: none;
+    }
+
+    #mobileActionButtons {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 0px 80px;
+        position: absolute;
+        bottom: 5%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #mobileActionButtons div {
+        display: flex;
+        gap: 32px;
+    }
+
+    #mobileActionButtons img {
+        height: 40px;
+        width: 40px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+    }
+
+    #bottle {
+        height: 50px !important;
+        width: 50px !important;
+        padding: 5px !important;
+        rotate: 30deg;
+    }
+}

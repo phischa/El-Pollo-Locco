@@ -31,7 +31,7 @@
 
 <body onload="init()">
     <h1 id="title">El Pollo Locco</h1>
-    
+
     <div id="main-container">
         <canvas id="canvas" width="860" height="480"></canvas>
         <div id="start-screen" class="overlay">
@@ -44,18 +44,45 @@
             <button onclick="restartGame()">Restart Game</button>
         </div>
         <div class="fullscreen">
-                <img class="hover" src="./img/icons/expand.png" onclick="fullscreen()">
+            <img class="hover" src="./img/icons/expand.png" onclick="fullscreen()">
         </div>
         <div class="volume">
-                <img class="hover" id="volume" src="./img/icons/volume.png" onclick="muteSounds()">
+            <img class="hover" id="volume" src="./img/icons/volume.png" onclick="muteSounds()">
         </div>
     </div>
     <br>
     <br>
     <div>
-        <span>Forward: Arrow Right&nbsp;&nbsp;&nbsp;&nbsp;Backward: Arrow Left&nbsp;&nbsp;&nbsp;&nbsp;Jump: Space&nbsp;&nbsp;&nbsp;&nbsp;Throw: D</span>
+        <span>Forward: Arrow Right&nbsp;&nbsp;&nbsp;&nbsp;Backward: Arrow Left&nbsp;&nbsp;&nbsp;&nbsp;Jump:
+            Space&nbsp;&nbsp;&nbsp;&nbsp;Throw: D</span>
+    </div>
+    <div id="buttonOverlayScreen">
+        <div id="mobileActionButtons">
+            <div id="leftActinButtons">
+                <img id="arrowLeft" src="./img/icons/angle-left.png">
+                <img id="arrowRight" src="./img/icons/angle-right.png">
+            </div>
+            <div id="rightActionButtons">
+                <img id="arrowUp" src="./img/icons/angle-up.png">
+                <img id="bottle" src="./img/6_salsa_bottle/salsa_bottle.png">
+            </div>
+        </div>
+
+        <div id="settings">
+            <div>
+                <img id="showInfo" class="hover" src="./img/icons/angle-up.png" onclick="showMenu(true)">
+                <img id="hideInfo" class="hover d-none" src="./img/icons/angle-up.png" onclick="showMenu(false)">
+            </div>
+            <div id="soundControll">
+                <img id="soundOn" class="hover" onclick="muteSounds()" src=".img/icons/volume.png">
+            </div>
+            <div>
+                <img class="hover" src="./img/icons/expand.png" onclick="fullscreen(event)">
+            </div>
+        </div>
     </div>
 
     <script src="js/fullscreen.js"></script>
 </body>
+
 </html>
