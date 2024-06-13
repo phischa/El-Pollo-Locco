@@ -8,6 +8,7 @@ let mute = false;
 function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
+    initTouch();
 }
 
 window.addEventListener('keydown', (e) => {
@@ -51,46 +52,91 @@ window.addEventListener('keyup', (e) => {
         keyboard.KeyD = false;
     }
 });
-    
-    function startGame() {
-        initLevel();
-        playMusic();
-        document.getElementById('start-screen').style.display = 'none';
-        document.getElementById('canvas').style.display = 'block';
-        world = new World(canvas, keyboard);
-        // Add code to start the game
-    }
 
-    function restartGame() {
-        initLevel();
-        playMusic();
-        document.getElementById('end-screen').style.display = 'none';
-        document.getElementById('win-screen').style.display = 'none';
-        document.getElementById('canvas').style.display = 'block';
-        world = new World(canvas, keyboard);
-    } 
+/**
+ * function checks touch events for controlling the game.
+ */
+function initTouch() {
+    document.getElementById('arrowLeft').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = true;
+    })
 
-    function playMusic() {
-        if (music.paused) {
-            music.play().catch(error => {
-                console.error('Error playing sound:', error);
-            });
-            music.addEventListener('ended', () => {
-                music.currentTime = 0;
-                music.play();
-            });
-        }
-    }
+    document.getElementById('arrowLeft').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.LEFT = false;
+    })
 
-    function muteSounds() {
-        let img = document.getElementById('volume');
-        if (mute === false) {
-            mute = true;
-            music.volume = 0.0;
-            img.src = './img/icons/mute.png';
-        } else {
-            mute = false;
-            music.volume = 1.0;
-            img.src = './img/icons/volume.png';
-        }
+    document.getElementById('arrowRight').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = true;
+    })
+
+    document.getElementById('arrowRight').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.RIGHT = false;
+    })
+
+    document.getElementById('arrowUp').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = true;
+    })
+
+    document.getElementById('arrowUp').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.SPACE = false;
+    })
+
+    document.getElementById('bottle').addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        keyboard.KeyD = true;
+    })
+
+    document.getElementById('bottle').addEventListener('touchend', (e) => {
+        e.preventDefault();
+        keyboard.KeyD = false;
+    })
+}
+
+function startGame() {
+    initLevel();
+    playMusic();
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
+    world = new World(canvas, keyboard);
+    // Add code to start the game
+}
+
+function restartGame() {
+    initLevel();
+    playMusic();
+    document.getElementById('end-screen').style.display = 'none';
+    document.getElementById('win-screen').style.display = 'none';
+    document.getElementById('canvas').style.display = 'block';
+    world = new World(canvas, keyboard);
+}
+
+function playMusic() {
+    if (music.paused) {
+        music.play().catch(error => {
+            console.error('Error playing sound:', error);
+        });
+        music.addEventListener('ended', () => {
+            music.currentTime = 0;
+            music.play();
+        });
     }
+}
+
+function muteSounds() {
+    let img = document.getElementById('volume');
+    if (mute === false) {
+        mute = true;
+        music.volume = 0.0;
+        img.src = './img/icons/mute.png';
+    } else {
+        mute = false;
+        music.volume = 1.0;
+        img.src = './img/icons/volume.png';
+    }
+}
