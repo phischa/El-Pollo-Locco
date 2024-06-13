@@ -23,8 +23,6 @@ class World {
     throwableObjects = [];
     chickenIsDead = false;
 
-    coinSound = new Audio('audio/coin.mp3')
-
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -78,7 +76,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        /* mo.drawFrame(this.ctx); */
+        mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -145,21 +143,14 @@ class World {
     checkCollectionCoin() {
         this.level.coins = this.level.coins.filter((coin) => {
             if (this.character.collisionWithCoin(coin)) {
-                /* this.playCoinSound(); */
                 this.coinNumber++;
                 this.statusBarCoin.setCoins(this.coinNumber);
+                music.play();
                 return false; // Remove the collected object from the array
             }
             return true; // Keep the uncollected object
         });
     }
-
-    /* playCoinSound() {
-        this.coinSound.play();
-        setTimeout(() => {
-            this.coinSound.pause();
-        }, 500);
-    } */
 
     /**
     * Checks for attacks against enemies and initiates death animation.
@@ -190,12 +181,12 @@ class World {
         if (this.keyboard.KeyD && this.bottleNumber > 0) {
             this.bottleNumber--;
             this.statusBarBottle.setBottles(this.bottleNumber);
-            this.character.isThrowing = true; 
+            this.character.isThrowing = true;
             this.bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(this.bottle);
             setTimeout(() => {
                 this.character.isThrowing = false;
-            }, 200); 
+            }, 200);
         }
     }
 

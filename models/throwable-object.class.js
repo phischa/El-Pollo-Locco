@@ -47,7 +47,7 @@ class ThrowableObject extends MoveableObject {
     }
 
     playSplash() {
-        this.speedY = -40;
+        this.speedY = -38;
         clearInterval(this.rotationInterval);
         clearInterval(this.movingInterval);
         this.splashInterval = setInterval(() => {

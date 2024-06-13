@@ -12,7 +12,7 @@ class Endboss extends MoveableObject {
     offset = {
         top: 60,
         right: 10,
-        bottom: 0,
+        bottom: 140,
         left: 10,
     };
 
@@ -64,7 +64,7 @@ class Endboss extends MoveableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DEAD);
-        this.speed = 15;
+        this.speed = 20;
         this.energy = 100;
         this.x = 2400;
         this.visible = true;
@@ -86,7 +86,7 @@ class Endboss extends MoveableObject {
                 this.attack();
             }
             i++;
-            if (world.character.x > 1600 && !this.hadFirstContact) {
+            if (world.character.x > 1500 && !this.hadFirstContact) {
                 i = 0;
                 this.hadFirstContact = true;
             }
@@ -128,6 +128,8 @@ class Endboss extends MoveableObject {
 
     winGame() {
         clearInterval(this.bossDeadInterval);
+        clearInterval(this.bossHurtInterval);
+        clearInterval(this.bossAttackInterval);
         music.pause();
         document.getElementById('win-screen').style.display = 'flex';
     }

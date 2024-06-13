@@ -7,6 +7,7 @@ class Character extends MoveableObject {
     walkingSound = new Audio('audio/walking.mp3');
     walkingInterval;
     walkingSoundInterval;
+    animeInterval;
     inactivityTimeout;
     inactivityTime = 0; // Track inactivity time
     isThrowing = false; // Flag to indicate throwing action
@@ -92,7 +93,9 @@ class Character extends MoveableObject {
         this.applyGravity();
         this.initAnimation();
     }
-
+    /**
+     * function initiates the different animation functions.
+     */
     initAnimation() {
         this.animateWalk();
         this.changeWalkingSound();
@@ -100,6 +103,9 @@ class Character extends MoveableObject {
         this.animateJump();
     }
 
+    /**
+     * function animates the walking of the character.
+     */
     animateWalk() {
         this.walkingInterval = setInterval(() => {
             this.handleMovement();
@@ -108,6 +114,9 @@ class Character extends MoveableObject {
         }, 1000 / 120);
     }
 
+    /**
+     * function tests if the character is moving to the right or the left.
+     */
     handleMovement() {
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
             this.moveRight();
@@ -119,6 +128,9 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * function updates the time of inactivity.
+     */
     updateInactivityTime() {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.isThrowing) {
             this.inactivityTime = 0; // Reset inactivity time on movement or throwing
@@ -127,36 +139,45 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * function updates the camera based on the characters x.
+     */
     updateCamera() {
         this.world.camera_x = -this.x + 80;
     }
 
+    /**
+     * function plays or pauses the walking sound of the character.
+     */
     changeWalkingSound() {
         this.walkingSoundInterval = setInterval(() => {
-            this.handleWalkingSound();
+            if ((this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isAboveGround()) ||
+                (this.world.keyboard.LEFT && this.x > 0 && !this.isAboveGround())) {
+                this.walkingSound.play();
+            } else {
+                this.walkingSound.pause();
+            }
         }, 1000 / 120);
     }
 
-    handleWalkingSound() {
-        if ((this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isAboveGround()) || 
-            (this.world.keyboard.LEFT && this.x > 0 && !this.isAboveGround())) {
-            this.walkingSound.play();
-        } else {
-            this.walkingSound.pause();
-        }
-    }
-
+    /**
+     * function sets the interval for the updateAnimation().
+     */
     switchAnimation() {
-        let animeInterval = setInterval(() => {
-            this.updateAnimation(animeInterval);
+        this.animeInterval = setInterval(() => {
+            this.updateAnimation();
         }, 70);
     }
 
-    updateAnimation(animeInterval) {
+    /**
+     * function updates the animation based on the status of the character.
+     * @param {handle} animeInterval 
+     */
+    updateAnimation() {
         if (this.isDead()) {
             this.playAnimation(this.IMAGES_DEAD);
             setTimeout(() => {
-                this.endGame(animeInterval);
+                this.endGame(this.animeInterval);
             }, 500);
         } else if (this.isHurt()) {
             this.playAnimation(this.IMAGES_HURT);
@@ -167,6 +188,9 @@ class Character extends MoveableObject {
         }
     }
 
+    /**
+     * function updates the animation based on the inactivity time of the character.
+     */
     playIdleAnimation() {
         if (!this.isThrowing) {
             if (this.inactivityTime >= 6000) {
@@ -175,12 +199,15 @@ class Character extends MoveableObject {
                 this.playAnimation(this.IMAGES_IDLE);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } 
+            }
         } else {
             this.loadImage('img/2_character_pepe/2_walk/W-21.png');
         }
     }
 
+    /**
+     * function checks if the character is jumping.
+     */
     animateJump() {
         setInterval(() => {
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
@@ -189,24 +216,41 @@ class Character extends MoveableObject {
         }, 1000 / 120);
     }
 
+    /**
+     * function returns the collision of the character with the bottles.
+     * @param {object} mo 
+     * @returns 
+     */
     collisionWithBottle(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height > mo.y &&
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right;
     }
 
+    /**
+    * function returns the collision of the character with the coins.
+    * @param {object} mo 
+    * @returns 
+    */
     collisionWithCoin(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }
 
+    /**
+     * function defines the jumping speed.
+     */
     jump() {
         this.speedY = 25;
     }
 
-    endGame(animeInterval) {
-        clearInterval(animeInterval);
+    /**
+     * function clears intervals, stops music and shows the end screen.
+     * @param {handle} animeInterval 
+     */
+    endGame() {
+        clearInterval(this.animeInterval);
         music.pause();
         clearInterval(this.walkingSoundInterval);
         clearInterval(this.walkingInterval);
