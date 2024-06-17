@@ -8,9 +8,9 @@ let mute = false;
  * Initializes the game environment.
  */
 function init() {
-    canvas = document.getElementById('canvas'); // Get the canvas element
-    ctx = canvas.getContext('2d'); // Get the 2D rendering context of the canvas
-    initTouch(); // Initialize touch event handlers
+    canvas = document.getElementById('canvas'); 
+    ctx = canvas.getContext('2d');
+    initTouch();
 }
 
 /**
@@ -117,7 +117,6 @@ function startGame() {
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
     world = new World(canvas, keyboard);
-    // Add any additional code to start the game
 }
 
 /**

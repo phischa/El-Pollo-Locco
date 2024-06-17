@@ -29,7 +29,7 @@ class Chicks extends Chicken {
         this.x = 600 + Math.random() * 1600;
         this.speed = 0.2 + Math.random() * 0.5;
         this.energy = 1;
-        this.visible = true; // Set the visible property to false after 1 second
+        this.visible = true;
         this.collidable = true;
         this.animateWalk();
     }
@@ -54,7 +54,7 @@ switchAnimation() {
  */
 stopPlayAnimation() {
     setTimeout(() => {
-        this.visible = false; // Set the visible property to false after 1 second
+        this.visible = false; 
         this.collidable = false;
     }, 1000);
 }

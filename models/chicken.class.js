@@ -39,7 +39,7 @@ class Chicken extends MoveableObject {
  */
     animateWalk() {
         this.chickenInterval = setInterval(() => {
-            if (this.visible) { // Only move if the chicken is visible
+            if (this.visible) { 
                 this.moveLeft();
             }
         }, 1000 / 60);
@@ -82,7 +82,7 @@ class Chicken extends MoveableObject {
     stopPlayAnimation() {
         this.collidable = false;
         setTimeout(() => {
-            this.visible = false; // Set the visible property to false after 1 second
+            this.visible = false; 
         }, 500);
     }
 
@@ -91,7 +91,7 @@ class Chicken extends MoveableObject {
      * @param {CanvasRenderingContext2D} ctx - The canvas rendering context.
      */
     draw(ctx) {
-        if (this.visible) { // Draw the chicken only if it's visible
+        if (this.visible) { 
             super.draw(ctx);
         }
     }

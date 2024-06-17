@@ -64,7 +64,7 @@ class MoveableObject extends DrawableObject {
      * @returns {boolean} True if the object is above the ground, false otherwise.
      */
     isAboveGround() {
-        if (this instanceof ThrowableObject) { //Throwable Object should always fall
+        if (this instanceof ThrowableObject) {
             return true;
         } else {
             return this.y < 120;
@@ -114,8 +114,8 @@ class MoveableObject extends DrawableObject {
      * @returns {boolean} True if the object is hurt, false otherwise.
      */
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit; //Difference in ms
-        timePassed = timePassed / 1000; //Difference in s
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
         return timePassed < 1;
     }
 

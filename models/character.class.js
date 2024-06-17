@@ -9,9 +9,8 @@ class Character extends MoveableObject {
     walkingSoundInterval;
     animeInterval;
     inactivityTimeout;
-    inactivityTime = 0; // Track inactivity time
-    isThrowing = false; // Flag to indicate throwing action
-
+    inactivityTime = 0;
+    isThrowing = false; 
     offset = {
         top: 110,
         right: 20,
@@ -133,9 +132,9 @@ class Character extends MoveableObject {
      */
     updateInactivityTime() {
         if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.isThrowing) {
-            this.inactivityTime = 0; // Reset inactivity time on movement or throwing
+            this.inactivityTime = 0;
         } else {
-            this.inactivityTime += 1000 / 120; // Increment inactivity time
+            this.inactivityTime += 1000 / 120;
         }
     }
 

@@ -48,12 +48,12 @@ class World {
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
-        this.ctx.translate(-this.camera_x, 0); // For fixed statusBar
+        this.ctx.translate(-this.camera_x, 0);
         this.addToMap(this.statusBar);
         this.addToMap(this.statusBarCoin);
         this.addToMap(this.statusBarBottle);
         this.addToMap(this.statusBarBoss);
-        this.ctx.translate(this.camera_x, 0); // For fixed statusBar
+        this.ctx.translate(this.camera_x, 0);
         this.drawMoveables();
     }
 
@@ -93,7 +93,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx); // Commented out to avoid confusion
+        // mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -174,9 +174,9 @@ class World {
             if (this.character.collisionWithBottle(collectableObject)) {
                 this.bottleNumber++;
                 this.statusBarBottle.setBottles(this.bottleNumber);
-                return false; // Remove the collected object from the array
+                return false;
             }
-            return true; // Keep the uncollected object
+            return true;
         });
     }
 
@@ -189,9 +189,9 @@ class World {
                 this.coinNumber++;
                 this.statusBarCoin.setCoins(this.coinNumber);
                 music.play();
-                return false; // Remove the collected object from the array
+                return false;
             }
-            return true; // Keep the uncollected object
+            return true;
         });
     }
 
@@ -240,8 +240,8 @@ class World {
         this.level.endboss.forEach((boss) => {
             this.throwableObjects.forEach((throwableObject) => {
                 if (throwableObject.isCollidingBoss(boss)) {
-                    throwableObject.splash = true; // Set splash to true
-                    throwableObject.playSplash(); // Play splash animation
+                    throwableObject.splash = true;
+                    throwableObject.playSplash();
                     boss.energy -= 20;
                     boss.bossHurt = true;
                     this.statusBarBoss.setPercentage(boss.energy);

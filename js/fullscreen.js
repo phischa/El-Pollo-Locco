@@ -15,8 +15,8 @@ function fullscreen() {
  * Requests fullscreen mode for the main container element.
  */
 function enterFullscreen() {
-    const element = document.getElementById('main-container'); // Get the main-container element
-    isFullscreen = true; // Update fullscreen state
+    const element = document.getElementById('main-container');
+    isFullscreen = true;
     if (element.requestFullscreen) {
         element.requestFullscreen();
     } else if (element.msRequestFullscreen) {
@@ -30,7 +30,7 @@ function enterFullscreen() {
  * Exits fullscreen mode.
  */
 function exitFullscreen() {
-    isFullscreen = false; // Update fullscreen state
+    isFullscreen = false;
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
