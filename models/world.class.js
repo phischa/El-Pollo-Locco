@@ -93,7 +93,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        // mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -161,7 +161,7 @@ class World {
     checkCollisionBoss() {
         this.level.endboss.forEach((boss) => {
             if (this.character.isColliding(boss)) {
-                this.character.hit();
+                this.character.hitHard();
                 this.statusBar.setPercentage(this.character.energy);
             }
         });

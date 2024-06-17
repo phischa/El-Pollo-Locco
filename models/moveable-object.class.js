@@ -110,6 +110,18 @@ class MoveableObject extends DrawableObject {
     }
 
     /**
+     * Reduces the object's energy when hit.
+     */
+    hitHard() {
+        this.energy -= 50;
+        if (this.energy <= 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
+    /**
      * Checks if the object is hurt (i.e., hit within the last second).
      * @returns {boolean} True if the object is hurt, false otherwise.
      */
