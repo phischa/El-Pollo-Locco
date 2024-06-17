@@ -129,6 +129,7 @@ class World {
             this.checkCollectionBottle();
             this.checkCollectionCoin();
             this.checkThrowObjects();
+            this.checkJumping(); 
             this.checkJumpAttack();
         }, 200);
     }
@@ -229,6 +230,18 @@ class World {
             this.throwableObjects.push(this.bottle);
             setTimeout(() => {
                 this.character.isThrowing = false;
+            }, 200);
+        }
+    }
+
+    /**
+     * Checks if the character jumps.
+     */
+    checkJumping() {
+        if (this.keyboard.SPACE) {
+            this.character.isJumping = true;
+            setTimeout(() => {
+                this.character.isJumping = false;
             }, 200);
         }
     }

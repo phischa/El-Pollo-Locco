@@ -10,7 +10,8 @@ class Character extends MoveableObject {
     animeInterval;
     inactivityTimeout;
     inactivityTime = 0;
-    isThrowing = false; 
+    isThrowing = false;
+    isJumping = false;
     offset = {
         top: 110,
         right: 20,
@@ -131,7 +132,7 @@ class Character extends MoveableObject {
      * function updates the time of inactivity.
      */
     updateInactivityTime() {
-        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.isThrowing) {
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT || this.isJumping) {
             this.inactivityTime = 0;
         } else {
             this.inactivityTime += 1000 / 120;
@@ -194,7 +195,7 @@ class Character extends MoveableObject {
         if (!this.isThrowing) {
             if (this.inactivityTime >= 6000) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
-            } else if (this.inactivityTime >= 3000) {
+            } else if (this.inactivityTime >= 1000 / 120) {
                 this.playAnimation(this.IMAGES_IDLE);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_WALKING);
