@@ -91,13 +91,6 @@ class MoveableObject extends DrawableObject {
         return isColliding;
     }
 
-    /* isColliding(mo) {
-        const isColliding = mo.collidable && this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
-            this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
-            this.x + this.offset.left < mo.x + mo.width - mo.offset.right;
-        return isColliding;
-    } */
-
     /**
      * Checks if the object is colliding with a boss object.
      * @param {MoveableObject} mo - The boss moveable object.
@@ -127,7 +120,7 @@ class MoveableObject extends DrawableObject {
      * Reduces the object's energy when hit.
      */
     hitHard() {
-        this.energy -= 50;
+        this.energy -= 100;
         if (this.energy <= 0) {
             this.energy = 0;
         } else {

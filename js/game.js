@@ -5,10 +5,17 @@ let music = new Audio('audio/salsa.mp3');
 let mute = false;
 
 /**
+ * Clears all intervals by stopping each active interval.
+ */
+function clearAllIntervals() {
+    for (let i = 1; i < 9999; i++) window.clearInterval(i);
+}
+
+/**
  * Initializes the game environment.
  */
 function init() {
-    canvas = document.getElementById('canvas'); 
+    canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
     initTouch();
 }
@@ -159,5 +166,9 @@ function muteSounds() {
         mute = false;
         music.volume = 1.0;
         img.src = './img/icons/volume.png';
+    }
+
+    function clearAllIntervals() {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
     }
 }

@@ -137,7 +137,7 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
                     this.winGame();
-                }, 3000);
+                }, 220);
             }
         }, 200);
     }
@@ -146,9 +146,7 @@ class Endboss extends MoveableObject {
      * Ends the game with a win screen and stops all boss animations.
      */
     winGame() {
-        clearInterval(this.bossDeadInterval);
-        clearInterval(this.bossHurtInterval);
-        clearInterval(this.bossAttackInterval);
+        clearAllIntervals();
         music.pause();
         document.getElementById('win-screen').style.display = 'flex';
     }

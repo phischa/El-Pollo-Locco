@@ -251,10 +251,8 @@ class Character extends MoveableObject {
      * @param {handle} animeInterval 
      */
     endGame() {
-        clearInterval(this.animeInterval);
+        clearAllIntervals();
         music.pause();
-        clearInterval(this.walkingSoundInterval);
-        clearInterval(this.walkingInterval);
         document.getElementById('end-screen').style.display = 'flex';
     }
 }
