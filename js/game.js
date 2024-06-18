@@ -8,7 +8,6 @@ let walkingSound = new Audio('audio/walking.mp3');
 let coinSound = new Audio('audio/coin.mp3');
 let splashSound = new Audio('audio/splash.mp3');
 let hopoffSound = new Audio('audio/hopoff.mp3');
-let jumpSound = new Audio('audio/jump2.mp3');
 
 let allAudio = [
     music,
@@ -16,7 +15,6 @@ let allAudio = [
     coinSound,
     splashSound,
     hopoffSound,
-    jumpSound
 ];
 
 /**
@@ -169,7 +167,7 @@ function playMusic() {
 }
 
 /**
- * Mutes or unmutes the game's background music.
+ * Toggles the sounds of the game on or off.
  */
 function toggleSounds() {
     if (mute === false) {
@@ -179,6 +177,9 @@ function toggleSounds() {
     }
 }
 
+/**
+ * Mutes the sounds of the game.
+ */
 function muteSounds () {
     let img = document.getElementById('volume');
     mute = true;
@@ -189,6 +190,9 @@ function muteSounds () {
         img.src = './img/icons/mute.png';
 }
 
+/**
+ * Unmutes the sounds of the game.
+ */
 function unmuteSounds() {
     let img = document.getElementById('volume');
     mute = false;

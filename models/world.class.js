@@ -30,7 +30,8 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        this.runBottleCheck();
+        this.runBottleBossCheck();
+        this.runBottleChickenCheck()
     }
 
     /**
@@ -127,7 +128,7 @@ class World {
             this.checkCollisions();
             this.checkCollisionBoss();
             this.checkCollectionBottle();
-            this.checkCollectionCoin();
+            this.checkCollectionCoin(); 
             this.checkThrowObjects();
             this.checkJumping();
             this.checkJumpAttack();
@@ -137,10 +138,19 @@ class World {
     /**
      * Sets interval to check for bottle attacks.
      */
-    runBottleCheck() {
+    runBottleBossCheck() {
         setInterval(() => {
             this.checkBottleAttack();
         }, 325);
+    }
+
+    /**
+     * Sets interval to check for bottle attacks.
+     */
+    runBottleChickenCheck() {
+        setInterval(() => {
+            this.checkBottleAttackChicken();
+        }, 70);
     }
 
     /**
@@ -262,6 +272,21 @@ class World {
                     setTimeout(() => {
                         boss.bossHurt = false;
                     }, 1000);
+                }
+            });
+        });
+    }
+
+    /**
+     * Checks if any throwable objects (bottles) collide with the endboss.
+     */
+    checkBottleAttackChicken() {
+        this.level.enemies.forEach((enemy) => {
+            this.throwableObjects.forEach((throwableObject) => {
+                if (throwableObject.isColliding(enemy)) {
+                    throwableObject.splash = true;
+                    throwableObject.playSplash();
+                    enemy.energy--;
                 }
             });
         });
