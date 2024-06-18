@@ -129,7 +129,7 @@ class World {
             this.checkCollectionBottle();
             this.checkCollectionCoin();
             this.checkThrowObjects();
-            this.checkJumping(); 
+            this.checkJumping();
             this.checkJumpAttack();
         }, 200);
     }
@@ -203,6 +203,7 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.chickenIsAttacked(enemy)) {
+                    hopoffSound.play();
                     this.enemyDies(enemy);
                 }
             });

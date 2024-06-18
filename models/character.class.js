@@ -4,7 +4,6 @@ class Character extends MoveableObject {
     height = 300;
     y = 40;
     speed = 5;
-    walkingSound = new Audio('audio/walking.mp3');
     walkingInterval;
     walkingSoundInterval;
     animeInterval;
@@ -12,7 +11,7 @@ class Character extends MoveableObject {
     inactivityTime = 0;
     isThrowing = false;
     isJumping = false;
-    
+
     offset = {
         top: 110,
         right: 20,
@@ -154,9 +153,9 @@ class Character extends MoveableObject {
         this.walkingSoundInterval = setInterval(() => {
             if ((this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isAboveGround()) ||
                 (this.world.keyboard.LEFT && this.x > 0 && !this.isAboveGround())) {
-                this.walkingSound.play();
+                walkingSound.play();
             } else {
-                this.walkingSound.pause();
+                walkingSound.pause();
             }
         }, 1000 / 120);
     }
@@ -194,7 +193,7 @@ class Character extends MoveableObject {
      */
     playIdleAnimation() {
         if (!this.isThrowing) {
-            if (this.inactivityTime >= 5000) {
+            if (this.inactivityTime >= 6000) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             } else if (this.inactivityTime >= 1000 / 120) {
                 this.playAnimation(this.IMAGES_IDLE);
@@ -235,6 +234,7 @@ class Character extends MoveableObject {
     */
     collisionWithCoin(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height > mo.y &&
             this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
             this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
     }

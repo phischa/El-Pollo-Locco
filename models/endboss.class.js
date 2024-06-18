@@ -137,7 +137,7 @@ class Endboss extends MoveableObject {
                 this.playAnimation(this.IMAGES_DEAD);
                 setTimeout(() => {
                     this.winGame();
-                }, 220);
+                }, 1050);
             }
         }, 200);
     }

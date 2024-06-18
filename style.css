@@ -247,10 +247,6 @@ span {
         display: none;
     }
 
-    .footer {
-        display: none;
-    }
-
     .volume {
         position: absolute;
         top: 30;
@@ -279,6 +275,10 @@ span {
     canvas {
         width: 100%;
         height: 100vh;
+    }
+
+    .footer {
+        display: none;
     }
 
     #turnDisplay {

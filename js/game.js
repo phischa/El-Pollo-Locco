@@ -1,8 +1,23 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let music = new Audio('audio/salsa.mp3');
 let mute = false;
+
+let music = new Audio('audio/salsa.mp3');
+let walkingSound = new Audio('audio/walking.mp3');
+let coinSound = new Audio('audio/coin.mp3');
+let splashSound = new Audio('audio/splash.mp3');
+let hopoffSound = new Audio('audio/hopoff.mp3');
+let jumpSound = new Audio('audio/jump2.mp3');
+
+let allAudio = [
+    music,
+    walkingSound,
+    coinSound,
+    splashSound,
+    hopoffSound,
+    jumpSound
+];
 
 /**
  * Clears all intervals by stopping each active interval.
@@ -156,19 +171,30 @@ function playMusic() {
 /**
  * Mutes or unmutes the game's background music.
  */
-function muteSounds() {
-    let img = document.getElementById('volume');
+function toggleSounds() {
     if (mute === false) {
-        mute = true;
-        music.volume = 0.0;
-        img.src = './img/icons/mute.png';
+        muteSounds();
     } else {
-        mute = false;
-        music.volume = 1.0;
-        img.src = './img/icons/volume.png';
+        unmuteSounds();
     }
+}
 
-    function clearAllIntervals() {
-        for (let i = 1; i < 9999; i++) window.clearInterval(i);
-    }
+function muteSounds () {
+    let img = document.getElementById('volume');
+    mute = true;
+        for (let i = 0; i < allAudio.length; i++) {
+            let currentSound = allAudio[i];
+            currentSound.muted = true;
+        }
+        img.src = './img/icons/mute.png';
+}
+
+function unmuteSounds() {
+    let img = document.getElementById('volume');
+    mute = false;
+        for (let i = 0; i < allAudio.length; i++) {
+            let currentSound = allAudio[i];
+            currentSound.muted = false;
+        }
+        img.src = './img/icons/volume.png';
 }

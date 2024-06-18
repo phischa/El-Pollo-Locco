@@ -1,7 +1,5 @@
 class StatusBarCoin extends DrawableObject {
 
-    coinSound = new Audio('audio/coin.mp3')
-
     IMAGES_COIN = [
         'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/0.png',
         'img/7_statusbars/1_statusbar/1_statusbar_coin/orange/20.png',
@@ -58,9 +56,9 @@ class StatusBarCoin extends DrawableObject {
      * Plays the coin sound and resumes background music after a short delay.
      */
     playCoinSound() {
-        this.coinSound.play();
+        coinSound.play();
         setTimeout(() => {
-            this.coinSound.pause();
+            coinSound.pause();
         }, 300);
         setTimeout(() => {
             music.play();

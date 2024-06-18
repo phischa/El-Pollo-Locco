@@ -5,7 +5,6 @@ class ThrowableObject extends MoveableObject {
     rotationInterval;
     splashInterval;
     bottle = [];
-    splashSound = new Audio('')
 
     IMAGES_ROTATION = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -56,12 +55,13 @@ class ThrowableObject extends MoveableObject {
      * Plays the splash animation when the object hits water.
      */
     playSplash() {
+        splashSound.play();
         this.speedY = -38;
         clearInterval(this.rotationInterval);
         clearInterval(this.movingInterval);
         this.splashInterval = setInterval(() => {
             this.playAnimation(this.IMAGES_SPLASH);
-        }, 1000 / 60);
+        }, 1000 / 60)   ;
         setTimeout(() => {
             clearInterval(this.splashInterval);
         }, this.IMAGES_SPLASH.length * 20);
