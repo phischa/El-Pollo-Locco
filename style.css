@@ -178,8 +178,8 @@ span {
 
 .volume {
     position: absolute;
+    right: 40px;
     bottom: 0;
-    right: 40;
     margin: 10px;
 }
 
@@ -187,7 +187,6 @@ span {
     height: 24px;
     width: 24px;
     cursor: pointer;
-    ;
     margin: 10px;
 }
 

@@ -132,23 +132,27 @@ function initTouch() {
  * Starts the game by initializing the level, playing music, and setting up the game world.
  */
 function startGame() {
-    initLevel();
+    setTimeout(() => {
+        initLevel();
     playMusic();
     document.getElementById('start-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
     world = new World(canvas, keyboard);
+    }, 500);
 }
 
 /**
  * Restarts the game by initializing the level, playing music, and resetting the game world.
  */
 function restartGame() {
-    initLevel();
+    setTimeout(() => {
+        initLevel();
     playMusic();
     document.getElementById('end-screen').style.display = 'none';
     document.getElementById('win-screen').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
     world = new World(canvas, keyboard);
+    }, 500);
 }
 
 /**

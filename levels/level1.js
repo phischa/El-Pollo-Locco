@@ -51,6 +51,7 @@ function initLevel() {
             new CollectableObject(),
             new CollectableObject(),
             new CollectableObject(),
+            new CollectableObject(),
         ],
         [
             new Coin(),
