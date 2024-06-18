@@ -142,7 +142,20 @@ span {
     font-size: 18px;
     letter-spacing: 1px;
     color: #A02209;
-    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.6);
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.6);
+}
+
+.footer {
+    position: absolute;
+    bottom: 30px;
+    left: auto;
+}
+
+.overlay-impressum {
+    letter-spacing: 1px;
+    color: #A02209;
+    text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.6);
+    text-decoration: none;
 }
 
 .fullscreen {
@@ -186,6 +199,19 @@ span {
     display: none;
 }
 
+.impressum {
+    font-size: 18px;
+    padding: 16px 48px 16px 48px;
+    border-radius: 12px;
+    color: #A02209;
+    text-shadow: 2px 2px 2px rgb(247, 242, 242);
+    text-align: center;
+    background-image: url('img/5_background/second_half_background.png');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 /* Smartphone */
 @media only screen and (max-width: 720px) {
     canvas {
@@ -218,6 +244,10 @@ span {
 
 @media only screen and (max-width: 950px) {
     .fullscreen {
+        display: none;
+    }
+
+    .footer {
         display: none;
     }
 
