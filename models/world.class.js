@@ -215,7 +215,7 @@ class World {
      * @returns {boolean} True if the character is attacking the enemy from above, false otherwise
      */
     chickenIsAttacked(enemy) {
-        return this.character.isColliding(enemy) && this.character.isAboveGround() && !enemy.isDead();
+        return this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 8 && !enemy.isDead();
     }
 
     /**

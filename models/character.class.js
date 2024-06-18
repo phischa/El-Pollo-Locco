@@ -12,6 +12,7 @@ class Character extends MoveableObject {
     inactivityTime = 0;
     isThrowing = false;
     isJumping = false;
+    
     offset = {
         top: 110,
         right: 20,
@@ -193,7 +194,7 @@ class Character extends MoveableObject {
      */
     playIdleAnimation() {
         if (!this.isThrowing) {
-            if (this.inactivityTime >= 6000) {
+            if (this.inactivityTime >= 5000) {
                 this.playAnimation(this.IMAGES_LONG_IDLE);
             } else if (this.inactivityTime >= 1000 / 120) {
                 this.playAnimation(this.IMAGES_IDLE);
