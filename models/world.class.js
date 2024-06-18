@@ -284,9 +284,9 @@ class World {
         this.level.enemies.forEach((enemy) => {
             this.throwableObjects.forEach((throwableObject) => {
                 if (throwableObject.isColliding(enemy)) {
+                    enemy.energy--;
                     throwableObject.splash = true;
                     throwableObject.playSplash();
-                    enemy.energy--;
                 }
             });
         });

@@ -147,6 +147,7 @@ class Endboss extends MoveableObject {
      */
     winGame() {
         clearAllIntervals();
+        walkingSound.pause();
         music.pause();
         document.getElementById('win-screen').style.display = 'flex';
     }

@@ -252,6 +252,7 @@ class Character extends MoveableObject {
      */
     endGame() {
         clearAllIntervals();
+        walkingSound.pause();
         music.pause();
         document.getElementById('end-screen').style.display = 'flex';
     }
