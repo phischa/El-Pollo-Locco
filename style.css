@@ -1,3 +1,21 @@
+#turnDisplay {
+    z-index: 100;
+    height: 100vh;
+    background-color: rgba(21, 22, 27, 0.999);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    color: rgba(239, 237, 237);
+    text-shadow: 2px 2px 3px #A02209;
+    letter-spacing: 5px;
+}
+
 body {
     display: flex;
     align-items: center;
@@ -15,7 +33,6 @@ body {
 
 canvas {
     background-color: black;
-    border: 1px solid #A02209;
     display: block;
 }
 
@@ -53,12 +70,6 @@ html {
 #main-container:-ms-fullscreen {
     width: 100vw;
     height: 100vh;
-}
-
-#canvas {
-    border: 1px solid black;
-    width: 100%;
-    height: 100%;
 }
 
 .overlay {
@@ -212,32 +223,10 @@ span {
 }
 
 /* Smartphone */
-@media only screen and (max-width: 720px) {
-    canvas {
-        width: 100%
-    }
-}
-
-@media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
-
-    title {
-        position: absolute;
-        top: 0;
-    }
-}
 
 @media only screen and (min-width: 720px) {
     #turnDisplay {
         display: none;
-    }
-}
-
-@media only screen and (max-height: 450px) {
-    #overlayScreen {
-        display: block;
     }
 }
 
@@ -248,17 +237,35 @@ span {
 
     .volume {
         position: absolute;
-        top: 30;
-        right: 20;
+        top: 30px;
+        right: 20px;
         margin: 10px;
     }
 
     h1 {
         display: none;
     }
+
+    #mainScreen,
+    #startScreen,
+    #overlayScreen,
+    #turnDisplay,
+    canvas {
+        width: 100%;
+    }
+
+    span {
+        font-size: 16px;
+    }
+
+    .footer {
+        bottom: -100px;
+        font-size: 16px;
+    }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 660px) {
+
     body {
         display: block;
         background: none;
@@ -268,35 +275,14 @@ span {
         display: none;
     }
 
-    #mainScreen,
-    #startScreen,
-    #overlayScreen,
-    canvas {
-        width: 100%;
-        height: 100vh;
+    #turnDisplay {
+        display: flex;
     }
 
     .footer {
         display: none;
     }
 
-    #turnDisplay {
-        z-index: 100;
-        height: 100vh;
-        background-color: rgba(21, 22, 27, 0.999);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        text-align: center;
-        color: rgba(239, 237, 237);
-        text-shadow: 2px 2px 3px #A02209;
-        letter-spacing: 5px;
-    }
 
     #sideMenu {
         display: none;
@@ -333,7 +319,19 @@ span {
     }
 }
 
+/* @media only screen and (max-height: 450px) {
+    #overlayScreen {
+        display: block;
+    }
+} */
+
 @media only screen and (max-height: 480px) {
+
+    title {
+        position: absolute;
+        top: 0;
+    }
+
     body {
         display: block;
     }
@@ -343,11 +341,11 @@ span {
     #overlayScreen,
     canvas {
         height: 100vh;
-        width: 100%;
+        /* width: 100%; */
     }
 
-    #sideMenu {
-        display: none;
+    #overlayScreen {
+        display: block;
     }
 
     #mobileActionButtons {
