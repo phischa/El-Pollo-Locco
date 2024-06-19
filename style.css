@@ -32,11 +32,6 @@ html {
     justify-content: center;
 }
 
-/* #canvas {
-    position: absolute;
-    
-} */
-
 #turnDisplay {
     z-index: 100;
     height: 100vh;
@@ -290,7 +285,6 @@ span {
         display: none;
     }
 
-
     #sideMenu {
         display: none;
     }
@@ -326,12 +320,6 @@ span {
     }
 }
 
-/* @media only screen and (max-height: 450px) {
-    #overlayScreen {
-        display: block;
-    }
-} */
-
 @media only screen and (max-height: 480px) {
 
     title {
@@ -348,7 +336,6 @@ span {
     #overlayScreen,
     canvas {
         height: 100vh;
-        /* width: 100%; */
     }
 
     #overlayScreen {
