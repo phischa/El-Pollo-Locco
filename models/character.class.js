@@ -13,7 +13,7 @@ class Character extends MoveableObject {
     isJumping = false;
 
     offset = {
-        top: 110,
+        top: 210,
         right: 20,
         bottom: 110,
         left: 10,

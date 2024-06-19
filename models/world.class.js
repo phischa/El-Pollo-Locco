@@ -94,7 +94,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        /* mo.drawFrame(this.ctx); */
+        mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
@@ -226,7 +226,7 @@ class World {
      * @returns {boolean} True if the character is attacking the enemy from above, false otherwise
      */
     chickenIsAttacked(enemy) {
-        return this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 8 && !enemy.isDead();
+        return this.character.isColliding(enemy) && this.character.isAboveGround() && this.character.speedY < 5 && !enemy.isDead();
     }
 
     /**
@@ -307,6 +307,8 @@ class World {
      */
     enemyDies(enemy) {
         enemy.energy--;
-        this.character.jump();
+        setTimeout(() => {
+            this.character.jump();
+        }, 60);
     }
 }

@@ -83,11 +83,25 @@ class MoveableObject extends DrawableObject {
      * @param {MoveableObject} mo - The other moveable object.
      * @returns {boolean} True if the objects are colliding, false otherwise.
      */
-    isColliding(mo) {
+    /* isColliding(mo) {
         const isColliding = mo.collidable && this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
             this.x < mo.x + mo.width &&
             this.y < mo.y + mo.height;
+        return isColliding;
+    } */
+
+    /**
+     * Checks if the current object is colliding with another movable object.
+     * @param {MovableObject} mo - The movable object to check collision with.
+     * @returns {boolean} True if there is a collision, false otherwise.
+     */
+    isColliding(mo) {
+        const isColliding = mo.collidable &&
+            this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
+            this.y + this.height > mo.y &&
+            this.x + this.offset.left < mo.x + mo.width - mo.offset.right &&
+            this.y + this.offset.top < mo.y + mo.height - mo.offset.bottom;
         return isColliding;
     }
 
