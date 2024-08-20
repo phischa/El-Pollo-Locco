@@ -52,6 +52,7 @@ html {
 
 #main-container {
     position: relative;
+    overflow: hidden;
 }
 
 #main-container:fullscreen {
@@ -138,7 +139,7 @@ button {
     background-color: rgba(255, 255, 255, 0.8);
     color: #A02209;
     border-color: #A02209;
-    margin-top: -330px;
+    margin-top: -200px;
     font-size: 20px;
     cursor: pointer;
     font-family: 'Ultra', 'Arial', 'Helvetica', 'sans-serif';
